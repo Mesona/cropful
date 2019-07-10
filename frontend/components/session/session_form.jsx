@@ -18,6 +18,7 @@ class SessionForm extends React.Component {
 
 
   handleInput (field) {
+    console.log(this.props.errors)
     return (e) => {
       this.setState({ [field]: e.currentTarget.value });
     };
@@ -49,9 +50,14 @@ class SessionForm extends React.Component {
           <span className={this.state.renderedErrors ? 'fading' : ''}>{this.props.errors[0]}</span>
         </li>
       </ul>
+      // <div>
+      //   <span className={this.state.renderedErrors ? 'fading' : ''}>{this.props.errors[0]}</span>
+      // </div>
     );
   }
 
+  // TODO: Fix the moving text for the login and signup modal, it currently only
+  // moves the first field modified
   render () {
     return (
       <div className="session-form" onClick={()=>{this.setState({active: false})}}>

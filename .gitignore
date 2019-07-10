@@ -7,11 +7,17 @@
 # Ignore bundler config.
 /.bundle
 
+
+# Ignore the default SQLite database.
+/db/*.sqlite3
+/db/*.sqlite3-journal
+
 # Ignore all logfiles and tempfiles.
 /log/*
 /tmp/*
 !/log/.keep
 !/tmp/.keep
+
 
 # Ignore uploaded files in development
 /storage/*
@@ -25,3 +31,22 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+
+
+# Additional development files
+.DS_Store
+.cache/
+dist/
+coverage/
+.vscode/
+.env
+
+# Manually added ignores
+tmp/
+log/
+test/
+node_modules/
+bundle.js
+bundle.js.map
+Gemfile.lock
+package-lock.json

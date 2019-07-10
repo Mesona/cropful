@@ -1,0 +1,24 @@
+* {
+  box-sizing: border-box;
+}
+
+#root {
+}
+
+button {
+  cursor: pointer;
+}
+
+:hover {
+  text-decoration: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+
+@import 'nav_bar';
+@import 'session';
+@import 'modal';
+@import 'errors';
