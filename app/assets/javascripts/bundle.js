@@ -494,7 +494,8 @@ function (_React$Component) {
       if (this.state.showingInfoWindow) this.setState({
         activeMarker: null,
         showingInfoWindow: false
-      });
+      }); // TODO
+      // Show dropdown to add either harvest node or trade node
     }
   }, {
     key: "onMarkerClick",

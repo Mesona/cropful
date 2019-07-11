@@ -23,6 +23,9 @@ export class Landing extends React.Component {
         activeMarker: null,
         showingInfoWindow: false
       });
+
+      // TODO
+      // Show dropdown to add either harvest node or trade node
   }
 
   onMarkerClick(props, marker) {

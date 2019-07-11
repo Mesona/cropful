@@ -10,10 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_09_194223) do
+ActiveRecord::Schema.define(version: 2019_07_11_225254) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "harvests", force: :cascade do |t|
+    t.string "harvest_type", null: false
+    t.binary "ripe", null: false
+    t.float "lat", null: false
+    t.float "lng", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["harvest_type"], name: "index_harvests_on_harvest_type"
+    t.index ["ripe"], name: "index_harvests_on_ripe"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "username", null: false
