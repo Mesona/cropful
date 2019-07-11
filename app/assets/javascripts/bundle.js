@@ -436,11 +436,12 @@ function (_React$Component) {
 /*!**********************************************!*\
   !*** ./frontend/components/home/landing.jsx ***!
   \**********************************************/
-/*! exports provided: default */
+/*! exports provided: Landing, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Landing", function() { return Landing; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var google_maps_react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! google-maps-react */ "./node_modules/google-maps-react/dist/index.js");
@@ -455,14 +456,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
 
 
 
@@ -477,28 +477,86 @@ function (_React$Component) {
     _classCallCheck(this, Landing);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(Landing).call(this, props));
-    _this.state = {};
+    _this.state = {
+      activeMarker: {},
+      selectedPlace: {},
+      showingInfoWindow: false
+    };
+    _this.onMapClicked = _this.onMapClicked.bind(_assertThisInitialized(_this));
+    _this.onMarkerClick = _this.onMarkerClick.bind(_assertThisInitialized(_this));
+    _this.onInfoWindowClose = _this.onInfoWindowClose.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(Landing, [{
+    key: "onMapClicked",
+    value: function onMapClicked() {
+      if (this.state.showingInfoWindow) this.setState({
+        activeMarker: null,
+        showingInfoWindow: false
+      });
+    }
+  }, {
+    key: "onMarkerClick",
+    value: function onMarkerClick(props, marker) {
+      this.setState({
+        activeMarker: marker,
+        selectedPlace: props,
+        showingInfoWindow: true
+      });
+    }
+  }, {
+    key: "onInfoWindowClose",
+    value: function onInfoWindowClose() {
+      this.setState({
+        activeMarker: null,
+        showingInfoWindow: false
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
+      if (!this.props.loaded) return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Loading...");
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(google_maps_react__WEBPACK_IMPORTED_MODULE_1__["Map"], {
         google: this.props.google,
-        zoom: 14
+        zoom: 14,
+        style: {
+          height: '75%',
+          width: '75%',
+          position: 'relative'
+        },
+        onClick: this.onMapClicked // initialCenter={{
+        //   lat: 40.854885,
+        //   lng: -88.081807
+        // }}
+
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(google_maps_react__WEBPACK_IMPORTED_MODULE_1__["Marker"], {
+        name: "SOMA",
         onClick: this.onMarkerClick,
-        name: 'Current location'
+        position: {
+          lat: 37.778519,
+          lng: -122.40564
+        }
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(google_maps_react__WEBPACK_IMPORTED_MODULE_1__["Marker"], {
+        name: "Dolores park",
+        onClick: this.onMarkerClick,
+        position: {
+          lat: 37.759703,
+          lng: -122.428093
+        }
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(google_maps_react__WEBPACK_IMPORTED_MODULE_1__["Marker"], {
+        name: "Current location",
+        onClick: this.onMarkerClick
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(google_maps_react__WEBPACK_IMPORTED_MODULE_1__["InfoWindow"], {
-        onClose: this.onInfoWindowClose
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Test"))));
+        marker: this.state.activeMarker,
+        onClose: this.onInfoWindowClose,
+        visible: this.state.showingInfoWindow
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, this.state.selectedPlace.name))));
     }
   }]);
 
   return Landing;
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
-
 ;
 /* harmony default export */ __webpack_exports__["default"] = (Object(google_maps_react__WEBPACK_IMPORTED_MODULE_1__["GoogleApiWrapper"])({
   apiKey: 'AIzaSyBRrhkrU7pa4BRmd3J7qhlX_ofoEGHy0LQ'
