@@ -86,6 +86,55 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./frontend/actions/harvest_actions.js":
+/*!*********************************************!*\
+  !*** ./frontend/actions/harvest_actions.js ***!
+  \*********************************************/
+/*! exports provided: RECEIVE_ALL_HARVESTS, RECEIVE_HARVEST, requestAllHarvests, requestHarvest */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_ALL_HARVESTS", function() { return RECEIVE_ALL_HARVESTS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_HARVEST", function() { return RECEIVE_HARVEST; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "requestAllHarvests", function() { return requestAllHarvests; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "requestHarvest", function() { return requestHarvest; });
+/* harmony import */ var _util_harvest_utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/harvest_utils */ "./frontend/util/harvest_utils.js");
+
+var RECEIVE_ALL_HARVESTS = 'RECEIVE_ALL_HARVESTS';
+var RECEIVE_HARVEST = 'RECEIVE_HARVEST';
+
+var receiveAllHarvests = function receiveAllHarvests(harvests) {
+  return {
+    type: RECEIVE_ALL_HARVESTS,
+    harvests: harvests
+  };
+};
+
+var receiveHarvest = function receiveHarvest(harvest) {
+  return {
+    type: RECEIVE_HARVEST,
+    harvest: harvest
+  };
+};
+
+var requestAllHarvests = function requestAllHarvests() {
+  return function (dispatch) {
+    return _util_harvest_utils__WEBPACK_IMPORTED_MODULE_0__["getHarvests"]().then(function (harvests) {
+      return dispatch(receiveAllHarvests(harvests));
+    });
+  };
+};
+var requestHarvest = function requestHarvest(id) {
+  return function (dispatch) {
+    return _util_harvest_utils__WEBPACK_IMPORTED_MODULE_0__["getHarvest"](id).then(function (harvest) {
+      return dispatch(receiveHarvest(harvest));
+    });
+  };
+};
+
+/***/ }),
+
 /***/ "./frontend/actions/modal_actions.js":
 /*!*******************************************!*\
   !*** ./frontend/actions/modal_actions.js ***!
@@ -1238,10 +1287,13 @@ var SessionErrorsReducer = function SessionErrorsReducer() {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _minor_reducers_user_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../minor_reducers/user_reducer */ "./frontend/reducers/minor_reducers/user_reducer.js");
+/* harmony import */ var _minor_reducers_harvest_reducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../minor_reducers/harvest_reducer */ "./frontend/reducers/minor_reducers/harvest_reducer.js");
+
 
 
 var EntitiesReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
-  users: _minor_reducers_user_reducer__WEBPACK_IMPORTED_MODULE_1__["default"]
+  users: _minor_reducers_user_reducer__WEBPACK_IMPORTED_MODULE_1__["default"],
+  harvests: _minor_reducers_harvest_reducer__WEBPACK_IMPORTED_MODULE_2__["default"]
 });
 /* harmony default export */ __webpack_exports__["default"] = (EntitiesReducer);
 
@@ -1284,6 +1336,46 @@ var UIReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
   modal: _minor_reducers_modal_reducer__WEBPACK_IMPORTED_MODULE_1__["default"]
 });
 /* harmony default export */ __webpack_exports__["default"] = (UIReducer);
+
+/***/ }),
+
+/***/ "./frontend/reducers/minor_reducers/harvest_reducer.js":
+/*!*************************************************************!*\
+  !*** ./frontend/reducers/minor_reducers/harvest_reducer.js ***!
+  \*************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var lodash_merge__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash/merge */ "./node_modules/lodash/merge.js");
+/* harmony import */ var lodash_merge__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash_merge__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _actions_harvest_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/harvest_actions */ "./frontend/actions/harvest_actions.js");
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+var HarvestsReducer = function HarvestsReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+  var harvest;
+  Object.freeze(state);
+
+  switch (action.type) {
+    case _actions_harvest_actions__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_ALL_HARVESTS"]:
+      return action.harvests;
+
+    case _actions_harvest_actions__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_HARVEST"]:
+      harvest = action.harvest;
+      return lodash_merge__WEBPACK_IMPORTED_MODULE_0___default()({}, state, _defineProperty({}, action.harvest.id, harvest));
+
+    default:
+      return state;
+  }
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (HarvestsReducer);
 
 /***/ }),
 
@@ -1463,6 +1555,32 @@ var configureStore = function configureStore() {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (configureStore);
+
+/***/ }),
+
+/***/ "./frontend/util/harvest_utils.js":
+/*!****************************************!*\
+  !*** ./frontend/util/harvest_utils.js ***!
+  \****************************************/
+/*! exports provided: getHarvests, getHarvest */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getHarvests", function() { return getHarvests; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getHarvest", function() { return getHarvest; });
+var getHarvests = function getHarvests() {
+  return $.ajax({
+    method: "GET",
+    url: "/api/harvests"
+  });
+};
+var getHarvest = function getHarvest(id) {
+  return $.ajax({
+    method: "GET",
+    url: "/api/harvests/".concat(id)
+  });
+};
 
 /***/ }),
 
