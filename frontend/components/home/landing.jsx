@@ -8,7 +8,8 @@ export class Landing extends React.Component {
     this.state = {
       activeMarker: {},
       selectedPlace: {},
-      showingInfoWindow: false
+      showingInfoWindow: false,
+      harvests: null,
     };
 
     this.onMapClicked = this.onMapClicked.bind(this);
@@ -43,6 +44,15 @@ export class Landing extends React.Component {
     });
   }
 
+  componentDidMount() {
+    this.props.requestAllHarvests()
+      // .then(response => console.log(response.harvests))
+      .then((response) => this.setState({
+        harvests: response.harvests,
+      })
+    );
+  }
+
   render () {
 
     if (!this.props.loaded) return <div>Loading...</div>;
@@ -53,13 +63,14 @@ export class Landing extends React.Component {
         zoom={14}
         style={{ height: '75%', width: '75%', position: 'relative' }}
         onClick={this.onMapClicked}
-        // initialCenter={{
-        //   lat: 40.854885,
-        //   lng: -88.081807
-        // }}
+        initialCenter={{
+          lat: 37.299462,
+          lng: -121.987637
+        }}
         >
 
-        <Marker
+        {/* TODO Remove these when reference no longer needed */}
+        {/* <Marker
           name="SOMA"
           onClick={this.onMarkerClick}
           position={{ lat: 37.778519, lng: -122.40564 }}
@@ -71,7 +82,15 @@ export class Landing extends React.Component {
           position={{ lat: 37.759703, lng: -122.428093 }}
         />
 
-        <Marker name="Current location" onClick={this.onMarkerClick} />
+        <Marker name="Current location" onClick={this.onMarkerClick} /> */}
+
+        {this.state.harvests === null ? '' : this.state.harvests.map( harvest => 
+          <Marker
+            name="Test"
+            onClick={this.onMarkerClick}
+            position={{ lat: harvest.lat, lng: harvest.lng }}
+          />
+        )}
 
         <InfoWindow
           marker={this.state.activeMarker}

@@ -529,7 +529,8 @@ function (_React$Component) {
     _this.state = {
       activeMarker: {},
       selectedPlace: {},
-      showingInfoWindow: false
+      showingInfoWindow: false,
+      harvests: null
     };
     _this.onMapClicked = _this.onMapClicked.bind(_assertThisInitialized(_this));
     _this.onMarkerClick = _this.onMarkerClick.bind(_assertThisInitialized(_this));
@@ -564,8 +565,22 @@ function (_React$Component) {
       });
     }
   }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      this.props.requestAllHarvests() // .then(response => console.log(response.harvests))
+      .then(function (response) {
+        return _this2.setState({
+          harvests: response.harvests
+        });
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
+      var _this3 = this;
+
       if (!this.props.loaded) return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Loading...");
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(google_maps_react__WEBPACK_IMPORTED_MODULE_1__["Map"], {
         google: this.props.google,
@@ -575,28 +590,20 @@ function (_React$Component) {
           width: '75%',
           position: 'relative'
         },
-        onClick: this.onMapClicked // initialCenter={{
-        //   lat: 40.854885,
-        //   lng: -88.081807
-        // }}
-
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(google_maps_react__WEBPACK_IMPORTED_MODULE_1__["Marker"], {
-        name: "SOMA",
-        onClick: this.onMarkerClick,
-        position: {
-          lat: 37.778519,
-          lng: -122.40564
+        onClick: this.onMapClicked,
+        initialCenter: {
+          lat: 37.299462,
+          lng: -121.987637
         }
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(google_maps_react__WEBPACK_IMPORTED_MODULE_1__["Marker"], {
-        name: "Dolores park",
-        onClick: this.onMarkerClick,
-        position: {
-          lat: 37.759703,
-          lng: -122.428093
-        }
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(google_maps_react__WEBPACK_IMPORTED_MODULE_1__["Marker"], {
-        name: "Current location",
-        onClick: this.onMarkerClick
+      }, this.state.harvests === null ? '' : this.state.harvests.map(function (harvest) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(google_maps_react__WEBPACK_IMPORTED_MODULE_1__["Marker"], {
+          name: "Test",
+          onClick: _this3.onMarkerClick,
+          position: {
+            lat: harvest.lat,
+            lng: harvest.lng
+          }
+        });
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(google_maps_react__WEBPACK_IMPORTED_MODULE_1__["InfoWindow"], {
         marker: this.state.activeMarker,
         onClose: this.onInfoWindowClose,
@@ -625,6 +632,8 @@ function (_React$Component) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _landing__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./landing */ "./frontend/components/home/landing.jsx");
+/* harmony import */ var _actions_harvest_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/harvest_actions */ "./frontend/actions/harvest_actions.js");
+
 
 
 
@@ -635,7 +644,11 @@ var mapStateToProps = function mapStateToProps(state) {
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-  return {};
+  return {
+    requestAllHarvests: function requestAllHarvests() {
+      return dispatch(Object(_actions_harvest_actions__WEBPACK_IMPORTED_MODULE_2__["requestAllHarvests"])());
+    }
+  };
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_landing__WEBPACK_IMPORTED_MODULE_1__["default"]));
