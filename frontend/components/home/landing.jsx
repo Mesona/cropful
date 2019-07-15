@@ -35,6 +35,12 @@ export class Landing extends React.Component {
       selectedPlace: props,
       showingInfoWindow: true
     });
+    console.log("!!!!!")
+    console.log(props)
+    console.log("!!!!!")
+    console.log(marker)
+    console.log(this.state.harvests)
+    console.log("!!!!!")
   }
 
   onInfoWindowClose() {
@@ -46,7 +52,6 @@ export class Landing extends React.Component {
 
   componentDidMount() {
     this.props.requestAllHarvests()
-      // .then(response => console.log(response.harvests))
       .then((response) => this.setState({
         harvests: response.harvests,
       })
@@ -56,6 +61,8 @@ export class Landing extends React.Component {
   render () {
 
     if (!this.props.loaded) return <div>Loading...</div>;
+    const monthNames = ["December", "January", "February", "March", "April", "May", "June",
+      "July", "August", "September", "October", "November"];
 
     return (
       <Map 
@@ -69,24 +76,17 @@ export class Landing extends React.Component {
         }}
         >
 
-        {/* TODO Remove these when reference no longer needed */}
-        {/* <Marker
-          name="SOMA"
-          onClick={this.onMarkerClick}
-          position={{ lat: 37.778519, lng: -122.40564 }}
-        />
-
-        <Marker
-          name="Dolores park"
-          onClick={this.onMarkerClick}
-          position={{ lat: 37.759703, lng: -122.428093 }}
-        />
-
-        <Marker name="Current location" onClick={this.onMarkerClick} /> */}
-
         {this.state.harvests === null ? '' : this.state.harvests.map( harvest => 
           <Marker
-            name="Test"
+            key={harvest.id}
+            name={harvest.harvest_type}
+            ripe={harvest.ripe}
+            updated_at=
+            {
+              monthNames[(harvest.updated_at.slice(5,7) % 12)].slice(0, 3) + ' '
+              + harvest.updated_at.slice(8, 10) + ' '
+              + harvest.updated_at.slice(0, 4)
+            }
             onClick={this.onMarkerClick}
             position={{ lat: harvest.lat, lng: harvest.lng }}
           />
@@ -98,14 +98,10 @@ export class Landing extends React.Component {
           visible={this.state.showingInfoWindow}>
           <div>
             <h1>{this.state.selectedPlace.name}</h1>
+            <h1>Ripe: {this.state.selectedPlace.ripe}</h1>
+            <h1>Last Updated: {this.state.selectedPlace.updated_at}</h1>
           </div>
         </InfoWindow>
-
-        {/* <InfoWindow position={{ lat: 37.765703, lng: -122.42564 }} visible>
-          <small>
-            Click on any of the markers to display an additional info.
-          </small>
-        </InfoWindow> */}
 
       </Map>
     );

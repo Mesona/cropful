@@ -555,6 +555,12 @@ function (_React$Component) {
         selectedPlace: props,
         showingInfoWindow: true
       });
+      console.log("!!!!!");
+      console.log(props);
+      console.log("!!!!!");
+      console.log(marker);
+      console.log(this.state.harvests);
+      console.log("!!!!!");
     }
   }, {
     key: "onInfoWindowClose",
@@ -569,8 +575,7 @@ function (_React$Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      this.props.requestAllHarvests() // .then(response => console.log(response.harvests))
-      .then(function (response) {
+      this.props.requestAllHarvests().then(function (response) {
         return _this2.setState({
           harvests: response.harvests
         });
@@ -582,6 +587,7 @@ function (_React$Component) {
       var _this3 = this;
 
       if (!this.props.loaded) return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Loading...");
+      var monthNames = ["December", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November"];
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(google_maps_react__WEBPACK_IMPORTED_MODULE_1__["Map"], {
         google: this.props.google,
         zoom: 14,
@@ -597,7 +603,10 @@ function (_React$Component) {
         }
       }, this.state.harvests === null ? '' : this.state.harvests.map(function (harvest) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(google_maps_react__WEBPACK_IMPORTED_MODULE_1__["Marker"], {
-          name: "Test",
+          key: harvest.id,
+          name: harvest.harvest_type,
+          ripe: harvest.ripe,
+          updated_at: monthNames[harvest.updated_at.slice(5, 7) % 12].slice(0, 3) + ' ' + harvest.updated_at.slice(8, 10) + ' ' + harvest.updated_at.slice(0, 4),
           onClick: _this3.onMarkerClick,
           position: {
             lat: harvest.lat,
@@ -608,7 +617,7 @@ function (_React$Component) {
         marker: this.state.activeMarker,
         onClose: this.onInfoWindowClose,
         visible: this.state.showingInfoWindow
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, this.state.selectedPlace.name))));
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, this.state.selectedPlace.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Ripe: ", this.state.selectedPlace.ripe), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Last Updated: ", this.state.selectedPlace.updated_at))));
     }
   }]);
 
