@@ -10,11 +10,17 @@ export class Landing extends React.Component {
       selectedPlace: {},
       showingInfoWindow: false,
       harvests: null,
+      // currentLatitude: Number("37.2996574"),
+      // currentLongitude: Number('-121.9876128'),
+      currentLatitude: 37,
+      currentLongitude: -121,
     };
 
     this.onMapClicked = this.onMapClicked.bind(this);
     this.onMarkerClick = this.onMarkerClick.bind(this);
     this.onInfoWindowClose = this.onInfoWindowClose.bind(this);
+    this.getStartingCoords = this.getStartingCoords.bind(this);
+    this.recenterMap = this.recenterMap.bind(this);
   }
 
 
@@ -27,6 +33,12 @@ export class Landing extends React.Component {
 
       // TODO
       // Show dropdown to add either harvest node or trade node
+      // this.recenterMap();
+      console.log("!!!!!")
+      console.log(this.props)
+      console.log("!!!!!")
+      console.log(this.state)
+      console.log("!!!!!")
   }
 
   onMarkerClick(props, marker) {
@@ -35,12 +47,6 @@ export class Landing extends React.Component {
       selectedPlace: props,
       showingInfoWindow: true
     });
-    console.log("!!!!!")
-    console.log(props)
-    console.log("!!!!!")
-    console.log(marker)
-    console.log(this.state.harvests)
-    console.log("!!!!!")
   }
 
   onInfoWindowClose() {
@@ -58,9 +64,49 @@ export class Landing extends React.Component {
     );
   }
 
+  // componentDidUpdate(prevProps, prevState) {
+  //   if (prevProps.google !== this.props.google) {
+  //     this.loadMap();
+  //   }
+  //   if (prevState.currentLocation !== this.state.currentLocation) {
+  //     this.recenterMap();
+  //   }
+  // }
+
+  recenterMap() {
+    const map = this.map;
+    const google = this.props.google;
+    const maps = google.maps;
+
+    if (map) {
+        let center = new maps.LatLng(this.state.currentLatitude, this.state.currentLongitude)
+        map.panTo(center);
+    }
+  }
+  
+  getStartingCoords() {
+    console.log("This is here")
+    navigator.geolocation.getCurrentPosition(
+      //Will give you the current location
+      (position) => {
+        // if (loc === "lat") {
+        //   return Number(JSON.stringify(position.coords.latitude));
+        // } else if (loc === "lng") {
+        //   return Number(JSON.stringify(position.coords.longitude));
+        // }
+        this.setState({
+          //getting the Longitude from the location json
+          currentLongitude: Number(JSON.stringify(position.coords.longitude)),
+          //getting the Latitude from the location json
+          currentLatitude: Number(JSON.stringify(position.coords.latitude)),
+        });
+      }
+    );
+  }
+
   render () {
 
-    if (!this.props.loaded) return <div>Loading...</div>;
+    // if (!this.props.loaded) return <div>Loading...</div>;
     const monthNames = ["December", "January", "February", "March", "April", "May", "June",
       "July", "August", "September", "October", "November"];
 
@@ -70,9 +116,17 @@ export class Landing extends React.Component {
         zoom={14}
         style={{ height: '75%', width: '75%', position: 'relative' }}
         onClick={this.onMapClicked}
+        // initialCenter={{
+        //   lat: 37.299462,
+        //   lng: -121.987637
+        // }}
+        // initialCenter={{
+        //   lat: this.getStartingCoords("lat"),
+        //   lng: this.getStartingCoords("lng")
+        // }}
         initialCenter={{
-          lat: 37.299462,
-          lng: -121.987637
+          lat: this.state.currentLatitude,
+          lng: this.state.currentLongitude
         }}
         >
 
