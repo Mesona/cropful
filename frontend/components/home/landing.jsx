@@ -1,5 +1,6 @@
 import React from 'react';
 import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
+import API_KEY from '../../apiKey';
 
 export class Landing extends React.Component {
   constructor(props) {
@@ -140,5 +141,5 @@ export class Landing extends React.Component {
 };
 
 export default GoogleApiWrapper({
-  apiKey: ('AIzaSyBRrhkrU7pa4BRmd3J7qhlX_ofoEGHy0LQ')
+  apiKey: (API_KEY)
 })(Landing)
