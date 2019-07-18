@@ -50,4 +50,3 @@ bundle.js
 bundle.js.map
 Gemfile.lock
 package-lock.json
-apiKey.js
