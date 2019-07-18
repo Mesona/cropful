@@ -50,9 +50,6 @@ class SessionForm extends React.Component {
           <span className={this.state.renderedErrors ? 'fading' : ''}>{this.props.errors[0]}</span>
         </li>
       </ul>
-      // <div>
-      //   <span className={this.state.renderedErrors ? 'fading' : ''}>{this.props.errors[0]}</span>
-      // </div>
     );
   }
 

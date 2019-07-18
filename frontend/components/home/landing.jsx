@@ -10,10 +10,8 @@ export class Landing extends React.Component {
       selectedPlace: {},
       showingInfoWindow: false,
       harvests: null,
-      // currentLatitude: Number("37.2996574"),
-      // currentLongitude: Number('-121.9876128'),
-      currentLatitude: 37,
-      currentLongitude: -121,
+      currentLatitude: 0,
+      currentLongitude: 0,
     };
 
     this.onMapClicked = this.onMapClicked.bind(this);
@@ -33,7 +31,6 @@ export class Landing extends React.Component {
 
       // TODO
       // Show dropdown to add either harvest node or trade node
-      // this.recenterMap();
       console.log("!!!!!")
       console.log(this.props)
       console.log("!!!!!")
@@ -62,16 +59,10 @@ export class Landing extends React.Component {
         harvests: response.harvests,
       })
     );
-  }
 
-  // componentDidUpdate(prevProps, prevState) {
-  //   if (prevProps.google !== this.props.google) {
-  //     this.loadMap();
-  //   }
-  //   if (prevState.currentLocation !== this.state.currentLocation) {
-  //     this.recenterMap();
-  //   }
-  // }
+    this.getStartingCoords();
+    this.recenterMap();
+  }
 
   recenterMap() {
     const map = this.map;
@@ -89,16 +80,9 @@ export class Landing extends React.Component {
     navigator.geolocation.getCurrentPosition(
       //Will give you the current location
       (position) => {
-        // if (loc === "lat") {
-        //   return Number(JSON.stringify(position.coords.latitude));
-        // } else if (loc === "lng") {
-        //   return Number(JSON.stringify(position.coords.longitude));
-        // }
         this.setState({
-          //getting the Longitude from the location json
-          currentLongitude: Number(JSON.stringify(position.coords.longitude)),
-          //getting the Latitude from the location json
-          currentLatitude: Number(JSON.stringify(position.coords.latitude)),
+          currentLongitude: position.coords.longitude,
+          currentLatitude: position.coords.latitude,
         });
       }
     );
@@ -106,7 +90,7 @@ export class Landing extends React.Component {
 
   render () {
 
-    // if (!this.props.loaded) return <div>Loading...</div>;
+    if (!this.props.loaded) return <div>Loading...</div>;
     const monthNames = ["December", "January", "February", "March", "April", "May", "June",
       "July", "August", "September", "October", "November"];
 
@@ -116,15 +100,7 @@ export class Landing extends React.Component {
         zoom={14}
         style={{ height: '75%', width: '75%', position: 'relative' }}
         onClick={this.onMapClicked}
-        // initialCenter={{
-        //   lat: 37.299462,
-        //   lng: -121.987637
-        // }}
-        // initialCenter={{
-        //   lat: this.getStartingCoords("lat"),
-        //   lng: this.getStartingCoords("lng")
-        // }}
-        initialCenter={{
+        center={{
           lat: this.state.currentLatitude,
           lng: this.state.currentLongitude
         }}
