@@ -1,6 +1,6 @@
 import React from 'react';
 import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
-import API_KEY from '../../apiKey';
+import {API_KEY} from '../../apiKey';
 
 export class Landing extends React.Component {
   constructor(props) {
@@ -20,6 +20,7 @@ export class Landing extends React.Component {
     this.onInfoWindowClose = this.onInfoWindowClose.bind(this);
     this.getStartingCoords = this.getStartingCoords.bind(this);
     this.recenterMap = this.recenterMap.bind(this);
+    this.updateRipe = this.updateRipe.bind(this);
   }
 
 
@@ -89,11 +90,20 @@ export class Landing extends React.Component {
     );
   }
 
+  updateRipe(status) {
+   this.setState({
+     selectedPlace: {ripe: status}
+   });
+   console.log(this.state.selectedPlace)
+  }
+
   render () {
 
     if (!this.props.loaded) return <div>Loading...</div>;
     const monthNames = ["December", "January", "February", "March", "April", "May", "June",
       "July", "August", "September", "October", "November"];
+
+    var contentString = "https://en.wikipedia.org/w/index.php?title=Uluru&oldid=297882194"
 
     return (
       <Map 
@@ -123,7 +133,8 @@ export class Landing extends React.Component {
           />
         )}
 
-        <InfoWindow
+        <InfoWindow 
+          onClick={() => console.log("info window")}
           marker={this.state.activeMarker}
           onClose={this.onInfoWindowClose}
           visible={this.state.showingInfoWindow}>
@@ -131,6 +142,19 @@ export class Landing extends React.Component {
             <h1>{this.state.selectedPlace.name}</h1>
             <h1>Ripe: {this.state.selectedPlace.ripe}</h1>
             <h1>Last Updated: {this.state.selectedPlace.updated_at}</h1>
+            <h1>Still ripe?
+              {/* <button className="addRipe" onClick={() => this.updateRipe(true)}> */}
+              <button className="addRipe" onClick={() => console.log("this")}>
+                +
+              </button>
+              {/* <button className="removeRipe" onClick={() => this.updateRipe(false)}> */}
+            </h1>
+            <button className="removeRipe" onClick={() => console.log('that')}>
+                -
+            </button>
+            content: <div>
+              <a href={contentString}>Stuff</a>
+              </div>
           </div>
         </InfoWindow>
 
