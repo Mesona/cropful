@@ -8,6 +8,17 @@
   font-style: bold;
 }
 
+#map {
+  height: 80%;
+  position: static;
+}
+
+html, body {
+  height: 80%;
+  margin: 0;
+  padding: 0;
+}
+
 .popup-bubble {
   /* Position the bubble centred-above its parent. */
   position: absolute;
@@ -28,7 +39,7 @@
 .popup-bubble-anchor {
   /* Position the div a fixed distance above the tip. */
   position: absolute;
-  width: 100%;
+  width: 80%;
   bottom: /* TIP_HEIGHT= */ 8px;
   left: 0;
 }

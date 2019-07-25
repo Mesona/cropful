@@ -152,11 +152,11 @@ export class Landing extends React.Component {
 
       // Official Google Maps API Attempt
       <section>
-        <div id="map"></div>
+        {/* <div id="map"></div> */}
 
-        <div id="content" onClick={this.onMapClicked}>
+        {/* <div id="content" onClick={this.onMapClicked}>
           Hello world!
-        </div>
+        </div> */}
 
         <script async defer
           src={api} >

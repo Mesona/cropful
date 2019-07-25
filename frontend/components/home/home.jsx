@@ -1,6 +1,8 @@
 import React from 'react';
 import Intro from './intro';
 import LandingContainer from './landing_container';
+import Test from '../test/test';
+// import StyledMapWithAnInfoBox from '../test/test';
 
 class Home extends React.Component {
   render () {
@@ -9,7 +11,9 @@ class Home extends React.Component {
     const display = currentUser ? (
 
       <div>
-        <LandingContainer />
+        {/* <LandingContainer /> */}
+        <Test />
+        {/* <StyledMapWithAnInfoBox /> */}
       </div>
     
     ) : (
