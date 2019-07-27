@@ -2,7 +2,6 @@ import React from 'react';
 import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
 import {API_KEY} from '../../apiKey';
 import Test from '../map/test';
-import CreatePopup from '../map/popup';
 
 export class Landing extends React.Component {
   constructor(props) {
