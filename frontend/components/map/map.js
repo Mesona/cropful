@@ -5,6 +5,7 @@ import { API_KEY } from '../../apiKey';
 class Map extends Component {
   constructor(props) {
     super(props);
+
     this.onScriptLoad = this.onScriptLoad.bind(this)
   }
 
