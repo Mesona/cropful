@@ -1,7 +1,8 @@
 import React from 'react';
 import Intro from './intro';
 import LandingContainer from './landing_container';
-import Test from '../test/test';
+// import Test from '../test/test';
+// import TestContainer from '../test/test_container';
 // import StyledMapWithAnInfoBox from '../test/test';
 
 class Home extends React.Component {
@@ -11,8 +12,8 @@ class Home extends React.Component {
     const display = currentUser ? (
 
       <div>
-        {/* <LandingContainer /> */}
-        <Test />
+        <LandingContainer />
+        {/* <TestContainer /> */}
         {/* <StyledMapWithAnInfoBox /> */}
       </div>
     
