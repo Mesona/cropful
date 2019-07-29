@@ -14,6 +14,7 @@ class Map extends Component {
     this.onScriptLoad = this.onScriptLoad.bind(this)
     this.getStartingCoords = this.getStartingCoords.bind(this);
     this.recenterMap = this.recenterMap.bind(this);
+    this.addMarker = this.addMarker.bind(this);
   }
 
   onScriptLoad() {
@@ -23,6 +24,10 @@ class Map extends Component {
 
     this.setState({
       map: map,
+    });
+
+    map.addListener('click', (e) => {
+      this.addMarker(e.latLng, map);
     });
 
     this.props.onMapLoad(this.state.map);
@@ -48,6 +53,17 @@ class Map extends Component {
         let center = new window.google.maps.LatLng(this.state.currentLatitude, this.state.currentLongitude);
         map.panTo(center)
     }
+
+  }
+
+  addMarker(location, map) {
+    // Add the marker at the clicked location, and add the next-available label
+    // from the array of alphabetical characters.
+    var marker = new google.maps.Marker({
+      position: location,
+      label: "test",
+      map: map
+    });
   }
 
   componentDidMount() {
@@ -66,6 +82,7 @@ class Map extends Component {
     } else {
       this.onScriptLoad()
     }
+
   }
 
   render() {

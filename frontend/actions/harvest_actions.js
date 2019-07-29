@@ -22,3 +22,8 @@ export const requestHarvest = id => dispatch => (
   HarvestsAPIUtils.getHarvest(id)
     .then(harvest => dispatch(receiveHarvest(harvest)))
 );
+
+export const updateHarvest = harvest => dispatch => (
+  HarvestsAPIUtils.patchHarvest(harvest)
+    .then(harvest => dispatch(receiveHarvest(harvest)))
+);
