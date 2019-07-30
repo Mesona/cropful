@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import { render } from 'react-dom'
 import { API_KEY } from '../../apiKey';
+import NewHarvest from './newHarvest';
 
 class Map extends Component {
   constructor(props) {
@@ -15,6 +17,7 @@ class Map extends Component {
     this.getStartingCoords = this.getStartingCoords.bind(this);
     this.recenterMap = this.recenterMap.bind(this);
     this.addMarker = this.addMarker.bind(this);
+    this.addHarvest = this.addHarvest.bind(this);
   }
 
   onScriptLoad() {
@@ -26,8 +29,13 @@ class Map extends Component {
       map: map,
     });
 
+    // WORKING for default marker
+    // map.addListener('click', (e) => {
+    //   this.addMarker(e.latLng, map);
+    // });
+
     map.addListener('click', (e) => {
-      this.addMarker(e.latLng, map);
+      this.addHarvest(e.latLng, map);
     });
 
     this.props.onMapLoad(this.state.map);
@@ -64,6 +72,22 @@ class Map extends Component {
       // label: "test",
       map: map
     });
+  }
+
+  addHarvest(location, map) {
+    var marker = new google.maps.Marker({
+      position: location,
+      map: map
+    });
+
+    const infoWindow = new window.google.maps.InfoWindow({
+      content: '<div id="infoWindow" />',
+      position: { lat: location.lat(), lng: location.lng() }
+    });
+    infoWindow.addListener('domready', e => {
+      render(<NewHarvest location={location} />, document.getElementById('infoWindow'))
+    })
+    infoWindow.open(map);
   }
 
   componentDidMount() {
