@@ -85,7 +85,7 @@ class Map extends Component {
       position: { lat: location.lat(), lng: location.lng() }
     });
     infoWindow.addListener('domready', e => {
-      render(<NewHarvest location={location} />, document.getElementById('infoWindow'))
+      render(<NewHarvest location={location} createHarvest={this.props.createHarvest}/>, document.getElementById('infoWindow'))
     })
     infoWindow.open(map);
   }

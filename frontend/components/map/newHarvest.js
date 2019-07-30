@@ -28,6 +28,7 @@ export class NewHarvest extends React.Component {
     console.log('submitted!')
     console.log(this.state)
     alert(this.state)
+    this.props.createHarvest(this.state);
   }
 
   updateRipe(status) {
