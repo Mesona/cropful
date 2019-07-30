@@ -13,13 +13,19 @@ const receiveHarvest = harvest => ({
   harvest,
 });
 
+
 export const requestAllHarvests = () => dispatch => (
   HarvestsAPIUtils.getHarvests()
-    .then(harvests => dispatch(receiveAllHarvests(harvests)))
-);
+  .then(harvests => dispatch(receiveAllHarvests(harvests)))
+  );
 
 export const requestHarvest = id => dispatch => (
   HarvestsAPIUtils.getHarvest(id)
+    .then(harvest => dispatch(receiveHarvest(harvest)))
+);
+
+export const createHarvest = harvest => dispatch => (
+  HarvestsAPIUtils.postHarvest(harvest)
     .then(harvest => dispatch(receiveHarvest(harvest)))
 );
 

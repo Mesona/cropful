@@ -61,7 +61,7 @@ class Map extends Component {
     // from the array of alphabetical characters.
     var marker = new google.maps.Marker({
       position: location,
-      label: "test",
+      // label: "test",
       map: map
     });
   }
