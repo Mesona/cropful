@@ -9,6 +9,7 @@ export class NewHarvest extends React.Component {
       ripe: "",
       lat: this.props.location.lat(),
       lng: this.props.location.lng(),
+      harvest_selection: "",
     };
 
     this.handleInput = this.handleInput.bind(this);
@@ -33,6 +34,9 @@ export class NewHarvest extends React.Component {
   }
 
   render() {
+    let fruit = ["Apple", "Orange", "Fig", "Passion Fruit", "Blackberry", "Raspberry", "Cranberry", "Strawberry", "Blueberry", "Lemon", "Lime", "Grapefruit", "Cherry", "Plumb", "Apricot", "Pear", "Peach"]
+    let herb = ["Sage", "Lavender", "Dill", "Fennel", "Thyme", "Bay", "Basil"]
+
     return(
       <div>
         Add new harvest!
@@ -42,6 +46,25 @@ export class NewHarvest extends React.Component {
             <section className="harvest-type">
               <span>Harvest Type: </span>
             </section>
+            <input
+              type="radio"
+              value={this.state.harvest_selection}
+              name="harvest-type"
+              onClick={() => this.updateRipe(true)}
+            />Fruit
+            <input
+              type="radio"
+              value={this.state.harvest_selection}
+              name="harvest-type"
+              onClick={() => this.updateRipe(false)}
+            />Herb
+            <input
+              type="radio"
+              value={this.state.harvest_selection}
+              name="harvest-type"
+              onClick={() => this.updateRipe(false)}
+            />Other
+            <br></br>
             <input
               type="text"
               value={this.state.harvest_type}

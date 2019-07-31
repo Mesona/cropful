@@ -11,13 +11,16 @@ class Map extends Component {
       map: null,
       currentLongitude: this.props.options.center.lng,
       currentLatitude: this.props.options.center.lat,
+      showNewHarvest: false,
+      currentInfoWindow: null,
+      markers: [],
     }
 
     this.onScriptLoad = this.onScriptLoad.bind(this)
     this.getStartingCoords = this.getStartingCoords.bind(this);
     this.recenterMap = this.recenterMap.bind(this);
-    this.addMarker = this.addMarker.bind(this);
     this.addHarvest = this.addHarvest.bind(this);
+    this.toggleMarker = this.toggleMarker.bind(this);
   }
 
   onScriptLoad() {
@@ -29,17 +32,8 @@ class Map extends Component {
       map: map,
     });
 
-    // WORKING for default marker
-    // map.addListener('click', (e) => {
-    //   this.addMarker(e.latLng, map);
-    // });
-
-    map.addListener('dblclick', (e) => {
-      // console.log(map.getZoom())
-      // map.setZoom(map.getZoom() - 1);
-      // console.log(map.getZoom())
-      // e.stop();
-      this.addHarvest(e.latLng, map);
+    map.addListener('click', (e) => {
+      this.toggleMarker(e.latLng);
     });
 
     this.props.onMapLoad(this.state.map);
@@ -68,33 +62,54 @@ class Map extends Component {
 
   }
 
-  addMarker(location, map) {
-    // Add the marker at the clicked location, and add the next-available label
-    // from the array of alphabetical characters.
-    var marker = new google.maps.Marker({
-      position: location,
-      // label: "test",
-      map: map
-    });
-  }
+  addHarvest(location) {
+    
+    const { map, markers } = this.state;
 
-  addHarvest(location, map) {
-    var marker = new google.maps.Marker({
-      position: location,
-      map: map
-    });
-
+    console.log("in addHarvest")
     const infoWindow = new window.google.maps.InfoWindow({
       content: '<div id="infoWindow" />',
       position: { lat: location.lat(), lng: location.lng() }
     });
+
+    this.setState({
+      currentInfoWindow: infoWindow,
+    })
+
+    var marker = new google.maps.Marker({
+      position: location,
+      map: map
+    });
+
+    markers.push(marker)
+
+    this.setState({
+      markers: markers
+    })
+
+    console.log(this.state.markers)
+    
     infoWindow.addListener('domready', e => {
       render(<NewHarvest location={location} createHarvest={this.props.createHarvest}/>, document.getElementById('infoWindow'))
-    })
-    map.addListener('click', e => {
-      infoWindow.close(map);
-    })
+    });
+
     infoWindow.open(map);
+  }
+
+  toggleMarker(location) {
+    console.log(this.state.showNewHarvest)
+    if (this.state.showNewHarvest === false) {
+      this.setState({
+        showNewHarvest: true,
+      });
+      this.addHarvest(location);
+    } else {
+      this.setState({
+        showNewHarvest: false,
+      });
+
+      this.state.currentInfoWindow.close(this.state.map)
+    }
   }
 
   componentDidMount() {
