@@ -66,7 +66,6 @@ class Map extends Component {
     
     const { map, markers } = this.state;
 
-    console.log("in addHarvest")
     const infoWindow = new window.google.maps.InfoWindow({
       content: '<div id="infoWindow" />',
       position: { lat: location.lat(), lng: location.lng() }
@@ -87,8 +86,6 @@ class Map extends Component {
       markers: markers
     })
 
-    console.log(this.state.markers)
-    
     infoWindow.addListener('domready', e => {
       render(<NewHarvest location={location} createHarvest={this.props.createHarvest}/>, document.getElementById('infoWindow'))
     });
@@ -97,7 +94,6 @@ class Map extends Component {
   }
 
   toggleMarker(location) {
-    console.log(this.state.showNewHarvest)
     if (this.state.showNewHarvest === false) {
       this.setState({
         showNewHarvest: true,
@@ -109,6 +105,8 @@ class Map extends Component {
       });
 
       this.state.currentInfoWindow.close(this.state.map)
+      this.state.markers[0].setMap(null);
+      this.state.markers.shift();
     }
   }
 
