@@ -25,15 +25,11 @@ export class NewHarvest extends React.Component {
 
   handleSubmit(e) {
     e.stopPropagation();
-    console.log('submitted!')
-    console.log(this.state)
-    alert(this.state)
     this.props.createHarvest(this.state);
   }
 
   updateRipe(status) {
     this.state.ripe = status;
-    console.log(this.state)
   }
 
   render() {
@@ -71,6 +67,8 @@ export class NewHarvest extends React.Component {
             />Not Ripe
           </label>
 
+          {/* TODO:
+          Figure out why the submit button is placed so incorrectly */}
           <input type="submit" className="form-button"></input>
         </form>
       </div>

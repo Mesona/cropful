@@ -22,7 +22,7 @@ export const postHarvest = harvest => (
 
 export const patchHarvest = harvest => (
   $.ajax({
-    method: `POST`,
+    method: `PATCH`,
     url: `/api/harvests/${harvest.id}`,
     data: { harvest }
   })

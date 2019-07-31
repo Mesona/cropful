@@ -34,7 +34,11 @@ class Map extends Component {
     //   this.addMarker(e.latLng, map);
     // });
 
-    map.addListener('click', (e) => {
+    map.addListener('dblclick', (e) => {
+      // console.log(map.getZoom())
+      // map.setZoom(map.getZoom() - 1);
+      // console.log(map.getZoom())
+      // e.stop();
       this.addHarvest(e.latLng, map);
     });
 
@@ -86,6 +90,9 @@ class Map extends Component {
     });
     infoWindow.addListener('domready', e => {
       render(<NewHarvest location={location} createHarvest={this.props.createHarvest}/>, document.getElementById('infoWindow'))
+    })
+    map.addListener('click', e => {
+      infoWindow.close(map);
     })
     infoWindow.open(map);
   }
