@@ -1,9 +1,6 @@
 import React from 'react';
 import Intro from './intro';
 import LandingContainer from './landing_container';
-// import Test from '../test/test';
-// import TestContainer from '../test/test_container';
-// import StyledMapWithAnInfoBox from '../test/test';
 
 class Home extends React.Component {
   render () {
@@ -13,8 +10,6 @@ class Home extends React.Component {
 
       <div>
         <LandingContainer />
-        {/* <TestContainer /> */}
-        {/* <StyledMapWithAnInfoBox /> */}
       </div>
     
     ) : (

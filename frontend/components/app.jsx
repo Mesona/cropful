@@ -5,9 +5,6 @@ import Modal from "./modal/modal";
 import HomeContainer from './home/home_container';
 import NavBarContainer from './nav_bar/nav_bar_container';
 
-// import Test from './test/test';
-import TestContainer from './test/test_container';
-
 const App = () => {
 
   return (
@@ -17,8 +14,6 @@ const App = () => {
 
       <Switch>
 
-        <Route exact path="/test" component={TestContainer} />
-        
         <Route path="/" component={HomeContainer} />
 
         <Redirect from="*" to="/" />

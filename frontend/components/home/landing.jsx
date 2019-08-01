@@ -1,171 +1,94 @@
 import React from 'react';
-import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
-import {API_KEY} from '../../apiKey';
+import { render } from 'react-dom';
+import MapContainer from '../map/map_container';
+import InfoWindow from '../map/infoWindow';
 
-export class Landing extends React.Component {
+class Landing extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
       activeMarker: {},
       selectedPlace: {},
-      showingInfoWindow: false,
       harvests: null,
-      currentLatitude: 0,
-      currentLongitude: 0,
-      map: null,
       popup: null,
     };
 
-    this.onMapClicked = this.onMapClicked.bind(this);
-    this.onMarkerClick = this.onMarkerClick.bind(this);
-    this.onInfoWindowClose = this.onInfoWindowClose.bind(this);
-    this.getStartingCoords = this.getStartingCoords.bind(this);
-    this.recenterMap = this.recenterMap.bind(this);
-    this.updateRipe = this.updateRipe.bind(this);
-    // this.createPopupClass = this.createPopupClass.bind(this);
-    // this.initMap = this.initMap.bind(this);
-    // this.popup = this.popup.bind(this);
-  }
-
-
-  onMapClicked() {
-    if (this.state.showingInfoWindow)
-      this.setState({
-        activeMarker: null,
-        showingInfoWindow: false
-      });
-
-      // TODO
-      // Show dropdown to add either harvest node or trade node
-      console.log("!!!!!")
-      console.log(this.props)
-      console.log("!!!!!")
-      console.log(this.state)
-      console.log("!!!!!")
-
-      this.initMap();
-  }
-
-  onMarkerClick(props, marker) {
-    this.setState({
-      activeMarker: marker,
-      selectedPlace: props,
-      showingInfoWindow: true
-    });
-  }
-
-  onInfoWindowClose() {
-    this.setState({
-      activeMarker: null,
-      showingInfoWindow: false
-    });
+    this.createInfoWindow = this.createInfoWindow.bind(this);
+    this.openInfoWindow = this.openInfoWindow.bind(this);
+    this.renderInfoWindow = this.renderInfoWindow.bind(this);
   }
 
   componentDidMount() {
+    // TODO:
+    // Harvests aren't loading when the map is first rendered, after logging in
     this.props.requestAllHarvests()
       .then((response) => this.setState({
         harvests: response.harvests,
       })
     );
-
-    this.getStartingCoords();
-    this.recenterMap();
   }
 
-  recenterMap() {
-    const map = this.map;
-    const google = this.props.google;
-    const maps = google.maps;
-    console.log("test");
-    console.log(this.map);
-    console.log("test")
+  renderInfoWindow(harvest) {
+    render(<InfoWindow harvest={harvest} updateHarvest={this.props.updateHarvest} />, document.getElementById('infoWindow'))
+  } 
 
-    if (map) {
-        let center = new maps.LatLng(this.state.currentLatitude, this.state.currentLongitude);
-        map.panTo(center);
+  createInfoWindow(e, map, harvest) {
+    const infoWindow = new window.google.maps.InfoWindow({
+        content: '<div id="infoWindow" />',
+        position: { lat: e.latLng.lat(), lng: e.latLng.lng() }
+    })
+    infoWindow.addListener('domready', this.renderInfoWindow(harvest));
+    map.addListener('drag', e => {
+      infoWindow.close(map);
+    })
+    if (this.state.showInfoWindow === true) {
+      infoWindow.open(map);
+    } else {
+      infoWindow.close(map);
     }
   }
-  
-  getStartingCoords() {
-    console.log("This is here")
-    navigator.geolocation.getCurrentPosition(
-      //Will give you the current location
-      (position) => {
-        this.setState({
-          currentLongitude: position.coords.longitude,
-          currentLatitude: position.coords.latitude,
-        });
-      }
-    );
+
+  openInfoWindow(e, map, harvest) {
+    console.log(this.state.showInfoWindow)
+    if (this.state.showInfoWindow === false) {
+      this.setState({
+        showInfoWindow: true,
+      });
+      this.createInfoWindow(e, map, harvest);
+    } else {
+      this.setState({
+        showInfoWindow: false,
+      })
+    }
   }
 
-  updateRipe(status) {
-   this.setState({
-     selectedPlace: {ripe: status}
-   });
-   console.log(this.state.selectedPlace)
-  }
-
-  render () {
-
-    if (!this.props.loaded) return <div>Loading...</div>;
-    const monthNames = ["December", "January", "February", "March", "April", "May", "June",
-      "July", "August", "September", "October", "November"];
-
-    var contentString = "https://en.wikipedia.org/w/index.php?title=Uluru&oldid=297882194"
-    let api = "https://maps.googleapis.com/maps/api/js?key=" + API_KEY + "&callback=initMap"
-
-
+  render() {
     return (
+      <div>
+        <MapContainer
+          id="myMap"
+          options={{
+            center: { lat: 37.299773, lng: -121.982679 },
+            zoom: 14
+          }}
 
-      // google-maps-react attempt
-      <Map 
-        google={this.props.google}
-        zoom={14}
-        style={{ height: '75%', width: '75%', position: 'relative' }}
-        onClick={this.onMapClicked}
-        center={{
-          lat: this.state.currentLatitude,
-          lng: this.state.currentLongitude
-        }}
-        >
-
-        {this.state.harvests === null ? '' : this.state.harvests.map( harvest => 
-          <Marker
-            key={harvest.id}
-            name={harvest.harvest_type}
-            ripe={harvest.ripe}
-            updated_at=
-            {
-              monthNames[(harvest.updated_at.slice(5,7) % 12)].slice(0, 3) + ' '
-              + harvest.updated_at.slice(8, 10) + ' '
-              + harvest.updated_at.slice(0, 4)
-            }
-            onClick={this.onMarkerClick}
-            position={{ lat: harvest.lat, lng: harvest.lng }}
-          />
-        )}
-
-        <InfoWindow 
-          onClick={() => console.log("info window")}
-          marker={this.state.activeMarker}
-          onClose={this.onInfoWindowClose}
-          visible={this.state.showingInfoWindow}>
-          <div className="infoDiv"> 
-            <h1>{this.state.selectedPlace.name}</h1>
-            <h1>Ripe: {this.state.selectedPlace.ripe}</h1>
-            <h1>Last Updated: {this.state.selectedPlace.updated_at}</h1>
-            <h1>Still ripe?</h1>
-          </div>
-        </InfoWindow>
-
-      </Map>
+          onMapLoad={map => {
+              {this.state.harvests === null ? '' : this.state.harvests.map( harvest => 
+                new window.google.maps.Marker({
+                  position: { lat: harvest.lat, lng: harvest.lng },
+                  map: map,
+                  key: harvest.id,
+                  harvest: harvest,
+                }).addListener('click', e => {
+                  this.createInfoWindow(e, map, harvest)
+                })
+              )}
+          }}
+        />
+      </div>
     );
-
   }
-};
+}
 
-export default GoogleApiWrapper({
-  apiKey: (API_KEY)
-})(Landing)
+export default Landing;
