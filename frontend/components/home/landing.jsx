@@ -38,15 +38,17 @@ class Landing extends React.Component {
         content: '<div id="infoWindow" />',
         position: { lat: e.latLng.lat(), lng: e.latLng.lng() }
     })
-    infoWindow.addListener('domready', this.renderInfoWindow(harvest));
+
+    infoWindow.addListener('domready', e => this.renderInfoWindow(harvest));
+
+
     map.addListener('drag', e => {
       infoWindow.close(map);
     })
-    if (this.state.showInfoWindow === true) {
-      infoWindow.open(map);
-    } else {
-      infoWindow.close(map);
-    }
+
+    infoWindow.open(map);
+
+    map.addListener('click', e => infoWindow.close(map));
   }
 
   openInfoWindow(e, map, harvest) {

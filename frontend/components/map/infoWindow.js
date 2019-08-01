@@ -40,6 +40,8 @@ class InfoWindow extends React.Component {
     const { classes, harvest } = this.props;
     const monthNames = ["December", "January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November"];
+    
+    console.log('test')
 
     return (
       <div>
@@ -86,11 +88,9 @@ class InfoWindow extends React.Component {
             </Typography>
           </CardContent>
           <CardActions>
-            {/* <Button size="small" color="primary" onClick={() => console.log("ripe")}> */}
             <Button size="small" color="primary" onClick={() => this.updateRipe(true)}>
               Ripe fruit available
             </Button>
-            {/* <Button size="small" color="primary" onClick={() => console.log("not rupe")}> */}
             <Button size="small" color="primary" onClick={() => this.updateRipe(false)}>
               Ripe fruit unavailable
             </Button>
