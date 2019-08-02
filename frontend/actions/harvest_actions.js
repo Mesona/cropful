@@ -16,7 +16,7 @@ const receiveHarvest = harvest => ({
 
 export const requestAllHarvests = () => dispatch => (
   HarvestsAPIUtils.getHarvests()
-  .then(harvests => dispatch(receiveAllHarvests(harvests)))
+    .then(harvests => dispatch(receiveAllHarvests(harvests)))
   );
 
 export const requestHarvest = id => dispatch => (

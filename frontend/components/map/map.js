@@ -14,6 +14,7 @@ class Map extends Component {
       showNewHarvest: false,
       currentInfoWindow: null,
       markers: [],
+      infoWindow: this.props.infoWindow,
     }
 
     this.onScriptLoad = this.onScriptLoad.bind(this)
@@ -30,6 +31,10 @@ class Map extends Component {
 
     this.setState({
       map: map,
+    });
+
+    map.addListener('click', (e) => {
+      console.log("State check in map: " + this.state.infoWindow);
     });
 
     map.addListener('click', (e) => {
@@ -57,7 +62,7 @@ class Map extends Component {
 
     if (map) {
         let center = new window.google.maps.LatLng(this.state.currentLatitude, this.state.currentLongitude);
-        map.panTo(center)
+        map.panTo(center);
     }
 
   }
@@ -94,11 +99,17 @@ class Map extends Component {
   }
 
   toggleMarker(location) {
-    if (this.state.showNewHarvest === false) {
+    if (this.state.showNewHarvest === false && this.state.infoWindow === null) {
       this.setState({
         showNewHarvest: true,
       });
       this.addHarvest(location);
+    } else if (this.state.showNewHarvest === false && this.state.infoWindow !== null) {
+      console.log("test")
+      this.state.infoWindow.close(this.state.map);
+      this.setState({
+        infoWindow: null,
+      });
     } else {
       this.setState({
         showNewHarvest: false,

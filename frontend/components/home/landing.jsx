@@ -8,14 +8,13 @@ class Landing extends React.Component {
     super(props);
 
     this.state = {
-      activeMarker: {},
-      selectedPlace: {},
+      activeMarker: false,
       harvests: null,
-      popup: null,
+      infoWindow: null,
+      map: null,
     };
 
     this.createInfoWindow = this.createInfoWindow.bind(this);
-    this.openInfoWindow = this.openInfoWindow.bind(this);
     this.renderInfoWindow = this.renderInfoWindow.bind(this);
   }
 
@@ -46,23 +45,16 @@ class Landing extends React.Component {
       infoWindow.close(map);
     })
 
+    this.props.storeInfoWindow(infoWindow)
+
     infoWindow.open(map);
 
-    map.addListener('click', e => infoWindow.close(map));
-  }
 
-  openInfoWindow(e, map, harvest) {
-    console.log(this.state.showInfoWindow)
-    if (this.state.showInfoWindow === false) {
-      this.setState({
-        showInfoWindow: true,
-      });
-      this.createInfoWindow(e, map, harvest);
-    } else {
-      this.setState({
-        showInfoWindow: false,
-      })
-    }
+    // this.setState({
+    //   map: map,
+    //   infoWindow: infoWindow,
+    // });
+
   }
 
   render() {
@@ -75,6 +67,8 @@ class Landing extends React.Component {
             zoom: 14
           }}
 
+          infoWindow={this.state.infoWindow}
+
           onMapLoad={map => {
               {this.state.harvests === null ? '' : this.state.harvests.map( harvest => 
                 new window.google.maps.Marker({
@@ -86,6 +80,11 @@ class Landing extends React.Component {
                   this.createInfoWindow(e, map, harvest)
                 })
               )}
+              map.addListener('click', (e) => {
+                console.log("State check: " + this.state.infoWindow);
+              });
+
+              this.props.storeMap(map);
           }}
         />
       </div>

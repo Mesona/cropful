@@ -41,7 +41,7 @@ class InfoWindow extends React.Component {
     const monthNames = ["December", "January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November"];
     
-    console.log('test')
+    // console.log('test')
 
     return (
       <div>
