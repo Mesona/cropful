@@ -26,6 +26,14 @@ class Landing extends React.Component {
         harvests: response.harvests,
       })
     );
+
+    // let infoWindow = 
+
+    // this.setState({
+    //   infoWindow: this.props.requestInfoWindow(),
+    // });
+
+    // console.log("Info window when empty: " + this.state.infoWindow)
   }
 
   renderInfoWindow(harvest) {
@@ -33,6 +41,13 @@ class Landing extends React.Component {
   } 
 
   createInfoWindow(e, map, harvest) {
+    if (this.state.infoWindow !== null) {
+      this.state.infoWindow.close(map);
+      this.setState({
+        infoWindow: null,
+      });
+    }
+
     const infoWindow = new window.google.maps.InfoWindow({
         content: '<div id="infoWindow" />',
         position: { lat: e.latLng.lat(), lng: e.latLng.lng() }
@@ -45,7 +60,10 @@ class Landing extends React.Component {
       infoWindow.close(map);
     })
 
-    this.props.storeInfoWindow(infoWindow)
+    this.props.storeInfoWindow(infoWindow);
+    this.setState({
+      infoWindow: infoWindow,
+    });
 
     infoWindow.open(map);
 
@@ -67,7 +85,7 @@ class Landing extends React.Component {
             zoom: 14
           }}
 
-          infoWindow={this.state.infoWindow}
+          // infoWindow={this.state.infoWindow}
 
           onMapLoad={map => {
               {this.state.harvests === null ? '' : this.state.harvests.map( harvest => 
