@@ -10,7 +10,7 @@ const MapReducer = (state = {}, action) => {
   switch (action.type) {
     case RECEIVE_MAP:
       map = action.map;
-      return merge({}, state, { [action.map.map]: map });
+      return merge({}, state, { [action.map]: map });
     default:
       return state;
   }

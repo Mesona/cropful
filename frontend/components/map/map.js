@@ -14,13 +14,11 @@ class Map extends Component {
       showNewHarvest: false,
       markers: [],
       infoWindow: this.props.infoWindow,
-    }
+    };
 
     this.onScriptLoad = this.onScriptLoad.bind(this)
     this.getStartingCoords = this.getStartingCoords.bind(this);
     this.recenterMap = this.recenterMap.bind(this);
-    this.addHarvest = this.addHarvest.bind(this);
-    this.toggleMarker = this.toggleMarker.bind(this);
   }
 
   onScriptLoad() {
@@ -30,10 +28,6 @@ class Map extends Component {
 
     this.setState({
       map: map,
-    });
-
-    map.addListener('click', (e) => {
-      this.toggleMarker(e.latLng);
     });
 
     this.props.storeInfoWindow(null)
@@ -65,77 +59,6 @@ class Map extends Component {
 
   }
 
-  addHarvest(location) {
-    
-    const { map, markers } = this.state;
-
-    const infoWindow = new window.google.maps.InfoWindow({
-      content: '<div id="infoWindow" />',
-      position: { lat: location.lat(), lng: location.lng() }
-    });
-
-    // this.setState({
-    //   infoWindow: infoWindow,
-    // })
-
-    this.props.storeInfoWindow(infoWindow);
-
-    var marker = new google.maps.Marker({
-      position: location,
-      map: map
-    });
-
-    markers.push(marker)
-
-    this.setState({
-      markers: markers
-    })
-
-    infoWindow.addListener('domready', e => {
-      render(<NewHarvest location={location} createHarvest={this.props.createHarvest}/>, document.getElementById('infoWindow'))
-    });
-
-    infoWindow.open(map);
-  }
-
-  toggleMarker(location) {
-    const { infoWindow } = this.props;
-    const { map } = this.state;
-
-    // this.props.storeInfoWindow('testInfoWindowText')
-    // let test = this.props.requestInfoWindow();
-    // console.log(test)
-
-    // this.setState({
-    //   infoWindow: this.props.requestInfoWindow(),
-    // });
-
-    // console.log("From the state: " + this.state.infoWindow)
-    console.log('this.state: ' + map);
-    console.log("this.props.infoWindow: " + infoWindow)
-    console.log("this.state.infoWindow: " + this.state.infoWindow)
-    console.log("this.state.showNewHarvest: " + this.state.showNewHarvest)
-
-    if (this.state.showNewHarvest === false && infoWindow === null) {
-      this.setState({
-        showNewHarvest: true,
-      });
-      this.addHarvest(location);
-    } else if (this.state.showNewHarvest === false && infoWindow !== null) {
-      infoWindow.close(map);
-      this.props.storeInfoWindow(null);
-    } else {
-      this.setState({
-        showNewHarvest: false,
-      });
-
-      infoWindow.close(this.state.map)
-      // this.state.currentInfoWindow.close(this.state.map)
-      this.state.markers[0].setMap(null);
-      this.state.markers.shift();
-    }
-  }
-
   componentDidMount() {
     if (!window.google) {
       let s = document.createElement('script');
@@ -144,7 +67,7 @@ class Map extends Component {
       let x = document.getElementsByTagName('script')[0];
       x.parentNode.insertBefore(s, x);
       // Below is important. 
-      //We cannot access google.maps until it's finished loading
+      // We cannot access google.maps until it's finished loading
       this.getStartingCoords();
       s.addEventListener('load', e => {
         this.onScriptLoad()

@@ -2,6 +2,7 @@ import React from 'react';
 import { render } from 'react-dom';
 import MapContainer from '../map/map_container';
 import InfoWindow from '../map/infoWindow';
+import NewHarvest from '../map/newHarvest';
 
 class Landing extends React.Component {
   constructor(props) {
@@ -12,10 +13,14 @@ class Landing extends React.Component {
       harvests: null,
       infoWindow: null,
       map: null,
+      showNewHarvest: false,
+      markers: [],
     };
 
     this.createInfoWindow = this.createInfoWindow.bind(this);
     this.renderInfoWindow = this.renderInfoWindow.bind(this);
+    this.addHarvest = this.addHarvest.bind(this);
+    this.toggleMarker = this.toggleMarker.bind(this);
   }
 
   componentDidMount() {
@@ -26,7 +31,6 @@ class Landing extends React.Component {
         harvests: response.harvests,
       })
     );
-
   }
 
   renderInfoWindow(harvest) {
@@ -44,14 +48,14 @@ class Landing extends React.Component {
     const infoWindow = new window.google.maps.InfoWindow({
         content: '<div id="infoWindow" />',
         position: { lat: e.latLng.lat(), lng: e.latLng.lng() }
-    })
+    });
 
     infoWindow.addListener('domready', e => this.renderInfoWindow(harvest));
 
 
     map.addListener('drag', e => {
       infoWindow.close(map);
-    })
+    });
 
     this.props.storeInfoWindow(infoWindow);
 
@@ -63,6 +67,66 @@ class Landing extends React.Component {
 
     infoWindow.open(map);
 
+  }
+
+  addHarvest(location) {
+    
+    const { markers, map } = this.state;
+
+    const infoWindow = new window.google.maps.InfoWindow({
+      content: '<div id="infoWindow" />',
+      position: { lat: location.lat(), lng: location.lng() }
+    });
+
+    var marker = new google.maps.Marker({
+      position: location,
+      map: map
+    });
+
+    markers.push(marker);
+
+    this.setState({
+      markers: markers,
+      infoWindow: infoWindow,
+    });
+
+    infoWindow.addListener('domready', e => {
+      render(<NewHarvest location={location} createHarvest={this.props.createHarvest}/>, document.getElementById('infoWindow'))
+    });
+
+    infoWindow.open(map);
+  }
+
+  toggleMarker(location) {
+    const { infoWindow, map } = this.state;
+
+    if (this.state.showNewHarvest === false && infoWindow === null) {
+
+      this.setState({
+        showNewHarvest: true,
+      });
+
+      this.addHarvest(location);
+
+    } else if (this.state.showNewHarvest === false && infoWindow !== null) {
+
+      infoWindow.close(map);
+
+      this.setState({
+        infoWindow: null,
+      });
+
+    } else {
+      
+      infoWindow.close(this.state.map);
+      this.state.markers[0].setMap(null);
+      this.state.markers.shift();
+
+      this.setState({
+        showNewHarvest: false,
+        infoWindow: null,
+      });
+    }
   }
 
   render() {
@@ -86,11 +150,17 @@ class Landing extends React.Component {
                   this.createInfoWindow(e, map, harvest)
                 })
               )}
+
               map.addListener('click', (e) => {
-                console.log("State check: " + this.state.infoWindow);
+                this.toggleMarker(e.latLng);
               });
 
-              // this.props.storeMap(map);
+              this.props.storeMap(map);
+
+              this.setState({
+                map: map,
+              })
+
           }}
         />
       </div>
