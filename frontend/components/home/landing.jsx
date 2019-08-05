@@ -27,13 +27,6 @@ class Landing extends React.Component {
       })
     );
 
-    // let infoWindow = 
-
-    // this.setState({
-    //   infoWindow: this.props.requestInfoWindow(),
-    // });
-
-    // console.log("Info window when empty: " + this.state.infoWindow)
   }
 
   renderInfoWindow(harvest) {
@@ -61,17 +54,14 @@ class Landing extends React.Component {
     })
 
     this.props.storeInfoWindow(infoWindow);
+
+    console.log("CREATING INFO WINDOW")
+
     this.setState({
       infoWindow: infoWindow,
     });
 
     infoWindow.open(map);
-
-
-    // this.setState({
-    //   map: map,
-    //   infoWindow: infoWindow,
-    // });
 
   }
 
@@ -84,8 +74,6 @@ class Landing extends React.Component {
             center: { lat: 37.299773, lng: -121.982679 },
             zoom: 14
           }}
-
-          // infoWindow={this.state.infoWindow}
 
           onMapLoad={map => {
               {this.state.harvests === null ? '' : this.state.harvests.map( harvest => 
@@ -102,7 +90,7 @@ class Landing extends React.Component {
                 console.log("State check: " + this.state.infoWindow);
               });
 
-              this.props.storeMap(map);
+              // this.props.storeMap(map);
           }}
         />
       </div>

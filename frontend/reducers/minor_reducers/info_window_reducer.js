@@ -9,8 +9,9 @@ const InfoWindowReducer = (state = {}, action) => {
   Object.freeze(state);
   switch (action.type) {
     case RECEIVE_INFO_WINDOW:
-      infoWindow = action.infoWindow;
-      return merge({}, state, { [action.infoWindow]: infoWindow });
+      return action.infoWindow;
+      // infoWindow = action.infoWindow;
+      // return merge({}, state, { [action.infoWindow]: infoWindow });
     default:
       return state;
   }

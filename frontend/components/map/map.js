@@ -12,7 +12,6 @@ class Map extends Component {
       currentLongitude: this.props.options.center.lng,
       currentLatitude: this.props.options.center.lat,
       showNewHarvest: false,
-      currentInfoWindow: null,
       markers: [],
       infoWindow: this.props.infoWindow,
     }
@@ -34,14 +33,13 @@ class Map extends Component {
     });
 
     map.addListener('click', (e) => {
-      console.log("State check in map: " + this.state.infoWindow);
-    });
-
-    map.addListener('click', (e) => {
       this.toggleMarker(e.latLng);
     });
 
-    this.props.onMapLoad(this.state.map);
+    this.props.storeInfoWindow(null)
+
+    this.props.storeMap(map);
+    this.props.onMapLoad(map);
     this.recenterMap();
   }
 
@@ -76,9 +74,11 @@ class Map extends Component {
       position: { lat: location.lat(), lng: location.lng() }
     });
 
-    this.setState({
-      currentInfoWindow: infoWindow,
-    })
+    // this.setState({
+    //   infoWindow: infoWindow,
+    // })
+
+    this.props.storeInfoWindow(infoWindow);
 
     var marker = new google.maps.Marker({
       position: location,
@@ -99,23 +99,38 @@ class Map extends Component {
   }
 
   toggleMarker(location) {
-    if (this.state.showNewHarvest === false && this.state.infoWindow === null) {
+    const { infoWindow } = this.props;
+    const { map } = this.state;
+
+    // this.props.storeInfoWindow('testInfoWindowText')
+    // let test = this.props.requestInfoWindow();
+    // console.log(test)
+
+    // this.setState({
+    //   infoWindow: this.props.requestInfoWindow(),
+    // });
+
+    // console.log("From the state: " + this.state.infoWindow)
+    console.log('this.state: ' + map);
+    console.log("this.props.infoWindow: " + infoWindow)
+    console.log("this.state.infoWindow: " + this.state.infoWindow)
+    console.log("this.state.showNewHarvest: " + this.state.showNewHarvest)
+
+    if (this.state.showNewHarvest === false && infoWindow === null) {
       this.setState({
         showNewHarvest: true,
       });
       this.addHarvest(location);
-    } else if (this.state.showNewHarvest === false && this.state.infoWindow !== null) {
-      console.log("test")
-      this.state.infoWindow.close(this.state.map);
-      this.setState({
-        infoWindow: null,
-      });
+    } else if (this.state.showNewHarvest === false && infoWindow !== null) {
+      infoWindow.close(map);
+      this.props.storeInfoWindow(null);
     } else {
       this.setState({
         showNewHarvest: false,
       });
 
-      this.state.currentInfoWindow.close(this.state.map)
+      infoWindow.close(this.state.map)
+      // this.state.currentInfoWindow.close(this.state.map)
       this.state.markers[0].setMap(null);
       this.state.markers.shift();
     }

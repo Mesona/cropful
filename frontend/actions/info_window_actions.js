@@ -5,10 +5,6 @@ const receiveInfoWindow = infoWindow => ({
   infoWindow,
 });
 
-export const requestInfoWindow = () => dispatch => (
-  infoWindow => dispatch(receiveInfoWindow(infoWindow))
-);
-
 export const storeInfoWindow = infoWindow => (
   receiveInfoWindow(infoWindow)
 );

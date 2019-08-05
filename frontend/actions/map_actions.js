@@ -5,10 +5,6 @@ const receiveMap = map => ({
   map,
 });
 
-export const requestMap = () => dispatch => (
-  map => dispatch(receiveMap(map))
-);
-
 export const storeMap = map => (
   receiveMap(map)
 );
