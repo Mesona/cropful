@@ -90,9 +90,9 @@ export class NewHarvest extends React.Component {
             />Not Ripe
           </label>
 
-          {/* TODO:
-          Figure out why the submit button is placed so incorrectly */}
-          <input type="submit" className="form-button"></input>
+          <br></br>
+
+          <input type="submit" className="new-harvest-button"></input>
         </form>
       </div>
     )
