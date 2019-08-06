@@ -15,12 +15,16 @@ class Landing extends React.Component {
       map: null,
       showNewHarvest: false,
       markers: [],
+      currentLongitude: null,
+      currentLatitude: null,
     };
 
     this.createInfoWindow = this.createInfoWindow.bind(this);
     this.renderInfoWindow = this.renderInfoWindow.bind(this);
     this.addHarvest = this.addHarvest.bind(this);
     this.toggleMarker = this.toggleMarker.bind(this);
+    this.getStartingCoords = this.getStartingCoords.bind(this);
+    this.recenterMap = this.recenterMap.bind(this);
   }
 
   componentDidMount() {
@@ -58,8 +62,6 @@ class Landing extends React.Component {
     });
 
     this.props.storeInfoWindow(infoWindow);
-
-    console.log("CREATING INFO WINDOW")
 
     this.setState({
       infoWindow: infoWindow,
@@ -129,13 +131,38 @@ class Landing extends React.Component {
     }
   }
 
+  getStartingCoords() {
+    navigator.geolocation.getCurrentPosition(
+      //Will give you the current location
+      (position) => {
+
+        this.setState({
+          currentLongitude: position.coords.longitude,
+          currentLatitude: position.coords.latitude,
+        });
+
+        this.recenterMap();
+      }
+    );
+  }
+
+  recenterMap() {
+    const map = this.state.map;
+
+    if (map) {
+        let center = new window.google.maps.LatLng(this.state.currentLatitude, this.state.currentLongitude);
+        map.panTo(center);
+    }
+
+  }
+
   render() {
     return (
       <div>
         <MapContainer
           id="myMap"
           options={{
-            center: { lat: 37.299773, lng: -121.982679 },
+            center: { lat: 37.333942, lng: -121.923552},
             zoom: 14
           }}
 
@@ -155,12 +182,11 @@ class Landing extends React.Component {
                 this.toggleMarker(e.latLng);
               });
 
-              this.props.storeMap(map);
-
               this.setState({
                 map: map,
               })
 
+              this.getStartingCoords()
           }}
         />
       </div>

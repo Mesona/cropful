@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import { render } from 'react-dom'
 import { API_KEY } from '../../apiKey';
-import NewHarvest from './newHarvest';
 
 class Map extends Component {
   constructor(props) {
@@ -13,12 +11,9 @@ class Map extends Component {
       currentLatitude: this.props.options.center.lat,
       showNewHarvest: false,
       markers: [],
-      infoWindow: this.props.infoWindow,
     };
 
     this.onScriptLoad = this.onScriptLoad.bind(this)
-    this.getStartingCoords = this.getStartingCoords.bind(this);
-    this.recenterMap = this.recenterMap.bind(this);
   }
 
   onScriptLoad() {
@@ -30,33 +25,7 @@ class Map extends Component {
       map: map,
     });
 
-    this.props.storeInfoWindow(null)
-
-    this.props.storeMap(map);
     this.props.onMapLoad(map);
-    this.recenterMap();
-  }
-
-  getStartingCoords() {
-    navigator.geolocation.getCurrentPosition(
-      //Will give you the current location
-      (position) => {
-        this.setState({
-          currentLongitude: position.coords.longitude,
-          currentLatitude: position.coords.latitude,
-        });
-      }
-    );
-  }
-
-  recenterMap() {
-    const map = this.state.map;
-
-    if (map) {
-        let center = new window.google.maps.LatLng(this.state.currentLatitude, this.state.currentLongitude);
-        map.panTo(center);
-    }
-
   }
 
   componentDidMount() {
@@ -68,7 +37,6 @@ class Map extends Component {
       x.parentNode.insertBefore(s, x);
       // Below is important. 
       // We cannot access google.maps until it's finished loading
-      this.getStartingCoords();
       s.addEventListener('load', e => {
         this.onScriptLoad()
       })
