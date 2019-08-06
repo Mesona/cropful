@@ -25,6 +25,7 @@ class Landing extends React.Component {
     this.toggleMarker = this.toggleMarker.bind(this);
     this.getStartingCoords = this.getStartingCoords.bind(this);
     this.recenterMap = this.recenterMap.bind(this);
+    this.closeInfoWindow = this.closeInfoWindow.bind(this);
   }
 
   componentDidMount() {
@@ -42,11 +43,9 @@ class Landing extends React.Component {
   } 
 
   createInfoWindow(e, map, harvest) {
+
     if (this.state.infoWindow !== null) {
-      this.state.infoWindow.close(map);
-      this.setState({
-        infoWindow: null,
-      });
+      this.closeInfoWindow();
     }
 
     const infoWindow = new window.google.maps.InfoWindow({
@@ -54,14 +53,16 @@ class Landing extends React.Component {
         position: { lat: e.latLng.lat(), lng: e.latLng.lng() }
     });
 
-    infoWindow.addListener('domready', e => this.renderInfoWindow(harvest));
+    infoWindow.addListener('domready', () => this.renderInfoWindow(harvest));
 
-
-    map.addListener('drag', e => {
-      infoWindow.close(map);
+    infoWindow.addListener('closeclick', () => {
+      this.closeInfoWindow();
     });
 
-    this.props.storeInfoWindow(infoWindow);
+
+    map.addListener('drag', () => {
+      this.closeInfoWindow();
+    });
 
     this.setState({
       infoWindow: infoWindow,
@@ -92,6 +93,10 @@ class Landing extends React.Component {
       infoWindow: infoWindow,
     });
 
+    infoWindow.addListener('closeclick', () => {
+      this.toggleMarker();
+    });
+
     infoWindow.addListener('domready', e => {
       render(<NewHarvest location={location} createHarvest={this.props.createHarvest}/>, document.getElementById('infoWindow'))
     });
@@ -100,7 +105,7 @@ class Landing extends React.Component {
   }
 
   toggleMarker(location) {
-    const { infoWindow, map } = this.state;
+    const { infoWindow } = this.state;
 
     if (this.state.showNewHarvest === false && infoWindow === null) {
 
@@ -112,22 +117,19 @@ class Landing extends React.Component {
 
     } else if (this.state.showNewHarvest === false && infoWindow !== null) {
 
-      infoWindow.close(map);
-
-      this.setState({
-        infoWindow: null,
-      });
+      this.closeInfoWindow();
 
     } else {
       
-      infoWindow.close(this.state.map);
+      this.closeInfoWindow();
+
       this.state.markers[0].setMap(null);
       this.state.markers.shift();
 
       this.setState({
         showNewHarvest: false,
-        infoWindow: null,
       });
+
     }
   }
 
@@ -152,6 +154,22 @@ class Landing extends React.Component {
     if (map) {
         let center = new window.google.maps.LatLng(this.state.currentLatitude, this.state.currentLongitude);
         map.panTo(center);
+    }
+
+  }
+
+  closeInfoWindow() {
+
+    const { map, infoWindow } = this.state;
+
+    if (infoWindow !== null) {
+      
+      infoWindow.close(map);
+  
+      this.setState({
+        infoWindow: null,
+      });
+
     }
 
   }
