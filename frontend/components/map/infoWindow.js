@@ -30,8 +30,10 @@ class InfoWindow extends React.Component {
 
 
   updateRipe(status) {
+    console.log("Old ripe status: " + this.state.ripe)
     this.state.harvest.ripe = status;
     this.props.updateHarvest(this.state.harvest);
+    console.log("New ripe status: " + this.state.ripe)
   }
   
 

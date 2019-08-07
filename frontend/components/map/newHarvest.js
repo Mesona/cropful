@@ -6,15 +6,16 @@ export class NewHarvest extends React.Component {
 
     this.state = {
       harvest_type: "",
-      ripe: "",
+      ripe: true,
       lat: this.props.location.lat(),
       lng: this.props.location.lng(),
-      harvest_selection: "",
+      harvest_selection: "harvest",
     };
 
     this.handleInput = this.handleInput.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.updateRipe = this.updateRipe.bind(this);
+    this.swapSelection = this.swapSelection.bind(this);
 
   }
 
@@ -30,63 +31,87 @@ export class NewHarvest extends React.Component {
   }
 
   updateRipe(status) {
-    this.state.ripe = status;
+    this.setState({ ripe: status});
+  }
+
+  swapSelection(type) {
+
+    if (this.state.harvest_selection === "harvest" && type === "barter") {
+      this.setState({ harvest_selection: "barter" });
+    } else if (this.state.harvest_selection === "barter" && type === "harvest") {
+      this.setState({ harvest_selection: "harvest" });
+    }
+
   }
 
   render() {
-    let fruit = ["Apple", "Orange", "Fig", "Passion Fruit", "Blackberry", "Raspberry", "Cranberry", "Strawberry", "Blueberry", "Lemon", "Lime", "Grapefruit", "Cherry", "Plumb", "Apricot", "Pear", "Peach"]
-    let herb = ["Sage", "Lavender", "Dill", "Fennel", "Thyme", "Bay", "Basil"]
 
     return(
       <div>
         Add new harvest!
 
         <form className="new-harvest-form"  onSubmit={(e) => this.handleSubmit(e)}>
+
+          <section className="harvest-type">
+            <span>Harvest Type: </span>
+          </section>
+
           <label onClick={e => e.stopPropagation()} >
-            <section className="harvest-type">
-              <span>Harvest Type: </span>
-            </section>
             <input
               type="radio"
-              value={this.state.harvest_selection}
-              name="harvest-type"
-              onClick={() => this.updateRipe(true)}
-            />Fruit
+              value="harvest"
+              name="harvest_selection"
+              defaultChecked
+              onChange={() => this.swapSelection("barter")}
+            />New Harvest
+          </label>
+          <label onClick={e => e.stopPropagation()} >
             <input
               type="radio"
-              value={this.state.harvest_selection}
-              name="harvest-type"
-              onClick={() => this.updateRipe(false)}
-            />Herb
-            <input
-              type="radio"
-              value={this.state.harvest_selection}
-              name="harvest-type"
-              onClick={() => this.updateRipe(false)}
-            />Other
+              value="barter"
+              name="harvest_selection"
+              onChange={() => this.swapSelection("harvest")}
+            />New Barter
             <br></br>
+
+          </label>
+
+          { this.state.harvest_selection === "harvest" ? 
             <input
               type="text"
               value={this.state.harvest_type}
               onChange={this.handleInput('harvest_type')}
             />
-          </label>
+          : 
+            <div>
+              Barter
+              <input
+                type="text"
+                value={this.state.harvest_type}
+                onChange={this.handleInput('harvest_type')}
+              />
+            </div>
+          } 
+
+          <section className="ripe">
+            <span>Ripe? </span>
+          </section>
 
           <label onClick={e => e.stopPropagation()} >
-            <section className="ripe">
-              <span>Ripe? </span>
-            </section>
             <input
               type="radio"
               value={this.state.ripe}
               name="ripe"
-              onClick={() => this.updateRipe(true)}
+              defaultChecked
+              onChange={() => this.updateRipe(true)}
             />Ripe
+          </label>
+          <label onClick={e => e.stopPropagation()} >
             <input
               type="radio"
               value={this.state.ripe}
               name="ripe"
-              onClick={() => this.updateRipe(false)}
+              onChange={() => this.updateRipe(false)}
             />Not Ripe
           </label>
 
