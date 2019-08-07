@@ -37,8 +37,10 @@ export class NewHarvest extends React.Component {
   swapSelection(type) {
 
     if (this.state.harvest_selection === "harvest" && type === "barter") {
+      console.log("switching to barter")
       this.setState({ harvest_selection: "barter" });
     } else if (this.state.harvest_selection === "barter" && type === "harvest") {
+      console.log("switching to harvest")
       this.setState({ harvest_selection: "harvest" });
     }
 
@@ -62,7 +64,7 @@ export class NewHarvest extends React.Component {
               value="harvest"
               name="harvest_selection"
               defaultChecked
-              onChange={() => this.swapSelection("barter")}
+              onChange={() => this.swapSelection("harvest")}
             />New Harvest
           </label>
           <label onClick={e => e.stopPropagation()} >
@@ -70,27 +72,31 @@ export class NewHarvest extends React.Component {
               type="radio"
               value="barter"
               name="harvest_selection"
-              onChange={() => this.swapSelection("harvest")}
+              onChange={() => this.swapSelection("barter")}
             />New Barter
             <br></br>
 
           </label>
 
           { this.state.harvest_selection === "harvest" ? 
-            <input
-              type="text"
-              value={this.state.harvest_type}
-              onChange={this.handleInput('harvest_type')}
-            />
+            (<div>
+              Harvest
+              <input
+                type="text"
+                value={this.state.harvest_type}
+                onChange={this.handleInput('harvest_type')}
+              />
+
+            </div>)
           : 
-            <div>
+            (<div>
               Barter
               <input
                 type="text"
                 value={this.state.harvest_type}
                 onChange={this.handleInput('harvest_type')}
               />
-            </div>
+            </div>)
           } 
 
           <section className="ripe">
