@@ -67,7 +67,8 @@ export class NewHarvest extends React.Component {
               onChange={() => this.swapSelection("harvest")}
             />New Harvest
           </label>
-          <label onClick={e => e.stopPropagation()} >
+
+          {/* <label onClick={e => e.stopPropagation()} >
             <input
               type="radio"
               value="barter"
@@ -75,8 +76,7 @@ export class NewHarvest extends React.Component {
               onChange={() => this.swapSelection("barter")}
             />New Barter
             <br></br>
-
-          </label>
+          </label> */}
 
           { this.state.harvest_selection === "harvest" ? 
             (
@@ -100,8 +100,8 @@ export class NewHarvest extends React.Component {
                   defaultChecked
                   onChange={() => this.updateRipe(true)}
                 />Ripe
-                </label>
-                <label onClick={e => e.stopPropagation()} >
+              </label>
+              <label onClick={e => e.stopPropagation()} >
                 <input
                   type="radio"
                   value={this.state.ripe}

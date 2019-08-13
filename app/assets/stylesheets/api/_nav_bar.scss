@@ -12,10 +12,14 @@
 }
 
 .login-logout-options {
-    text-align: center;
-    vertical-align: middle; 
-    padding-top: 10px;
-    border-radius: 5px;
+  text-align: center;
+  vertical-align: middle; 
+  padding-top: 10px;
+  border-radius: 5px;
+  font-size: 20px;
+  color: rgba(0, 0, 0, 0.54);
+  text-decoration: none;
+  padding-bottom: -5px;
 }
 
 .login-logout-options button {

@@ -9,7 +9,6 @@ class SessionForm extends React.Component {
       username: this.props.user.username,
       email: this.props.user.email,
       password: this.props.user.password,
-      active: false,
       renderedErrors: false,
     };
 
@@ -18,7 +17,6 @@ class SessionForm extends React.Component {
 
 
   handleInput (field) {
-    console.log(this.props.errors)
     return (e) => {
       this.setState({ [field]: e.currentTarget.value });
     };
@@ -53,55 +51,50 @@ class SessionForm extends React.Component {
     );
   }
 
-  // TODO: Fix the moving text for the login and signup modal, it currently only
-  // moves the first field modified
   render () {
     return (
-      <div className="session-form" onClick={()=>{this.setState({active: false})}}>
+      <div className="session-form">
         <div onClick={this.props.closeModal} className="close-x">X</div><br></br><br></br>
         <div className="modal-title">{this.props.formType}</div><br></br>
 
         <form className="login-form-box"  onSubmit={this.handleSubmit}>
 
           <label className={this.props.shouldHide ? 'hidden' : ''} onClick={e => e.stopPropagation()} >
-            <section className="descriptor-div">
-              <span className={this.state.active === 'username' ? 'placeholderText' : this.state.username === '' ? '' : 'hidden'}>Username</span>
+            <section>
+              <span>Username</span>
             </section>
             <input
               type="text"
               value={this.state.username}
               onChange={this.handleInput('username')}
-              onClick={()=>{this.setState({active: 'username'})}}
             />
           </label>
 
           <label onClick={e => e.stopPropagation()}>
-            <section className="descriptor-div">
-              <span className={this.state.active === 'email' ? 'placeholderText' : this.state.email === '' ? '' : 'hidden'}>Email</span>
+            <section>
+              <span>Email</span>
             </section>
             <input
               type="text"
               value={this.state.email}
               onChange={this.handleInput('email')}
-              onClick={()=>{this.setState({active: 'email'})}}
             />
           </label>
 
           <label onClick={e => e.stopPropagation()}>
-            <section className="descriptor-div">
-              <span  className={this.state.active === 'password' ? 'placeholderText' : this.state.password === '' ? '' : 'hidden'}>Password</span>
+            <section>
+              <span>Password</span>
             </section>
             <input
               type="password"
               value={this.state.password}
               onChange={this.handleInput('password')}
-              onClick={()=>{this.setState({active: 'password'})}}
             />
           </label>
 
           <div className="session-errors"><br></br>{this.renderErrors()}</div>
 
-          <nav className="session-form-buttons">
+          <nav>
             <input type="submit" className="form-button" value={this.props.formType}></input>
             <div className="other-form-button">
               {this.props.otherForm}

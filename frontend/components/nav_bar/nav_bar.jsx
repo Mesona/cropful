@@ -28,7 +28,7 @@ class NavBar extends React.Component {
         <header className="nav-bar">
 
           <div className="logo">
-            <p onClick={() => console.log(this.props)}>Fruit Map</p>
+            <p>Cropfull</p>
           </div>
 
           <div className="nav-display">
