@@ -79,7 +79,8 @@ export class NewHarvest extends React.Component {
           </label>
 
           { this.state.harvest_selection === "harvest" ? 
-            (<div>
+            (
+            <div>
               Harvest
               <input
                 type="text"
@@ -87,7 +88,30 @@ export class NewHarvest extends React.Component {
                 onChange={this.handleInput('harvest_type')}
               />
 
-            </div>)
+              <section className="ripe">
+                <span>Ripe? </span>
+              </section>
+
+              <label onClick={e => e.stopPropagation()} >
+                <input
+                  type="radio"
+                  value={this.state.ripe}
+                  name="ripe"
+                  defaultChecked
+                  onChange={() => this.updateRipe(true)}
+                />Ripe
+                </label>
+                <label onClick={e => e.stopPropagation()} >
+                <input
+                  type="radio"
+                  value={this.state.ripe}
+                  name="ripe"
+                  onChange={() => this.updateRipe(false)}
+                />Not Ripe
+              </label>
+            </div>
+            
+            )
           : 
             (<div>
               Barter
@@ -99,27 +123,7 @@ export class NewHarvest extends React.Component {
             </div>)
           } 
 
-          <section className="ripe">
-            <span>Ripe? </span>
-          </section>
-
-          <label onClick={e => e.stopPropagation()} >
-            <input
-              type="radio"
-              value={this.state.ripe}
-              name="ripe"
-              defaultChecked
-              onChange={() => this.updateRipe(true)}
-            />Ripe
-          </label>
-          <label onClick={e => e.stopPropagation()} >
-            <input
-              type="radio"
-              value={this.state.ripe}
-              name="ripe"
-              onChange={() => this.updateRipe(false)}
-            />Not Ripe
-          </label>
+          
 
           <br></br>
 
