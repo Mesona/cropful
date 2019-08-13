@@ -17,6 +17,11 @@ a {
   text-decoration: none;
 }
 
+input {
+  font-size: 20px;
+  border-radius: 3px;
+}
+
 
 @import 'nav_bar';
 @import 'session';

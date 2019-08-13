@@ -43,12 +43,6 @@
   height: 70%;
   border: 1px solid lightslategray;
   border-radius: 10px;
-
-}
-
-input {
-  font-size: 20px;
-  border-radius: 3px;
 }
 
 .form-button {
@@ -117,14 +111,4 @@ input {
   font-size: 20px;
   color: #80868B;
   cursor: text;
-}
-
-.welcome-text span a {
-  text-decoration: initial;
-  color: blue;
-}
-
-.welcome-text span a:hover {
-  text-decoration: initial;
-  color: white;
 }

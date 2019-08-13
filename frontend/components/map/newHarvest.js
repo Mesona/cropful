@@ -68,6 +68,7 @@ export class NewHarvest extends React.Component {
             />New Harvest
           </label>
 
+          {/* TODO: Uncomment after a/A job fair */}
           {/* <label onClick={e => e.stopPropagation()} >
             <input
               type="radio"
