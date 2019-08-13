@@ -14,4 +14,6 @@
 class Harvest < ApplicationRecord
   validates :harvest_type, :ripe, :lat, :lng, presence: true
 
+  # TODO:
+  # BELONGS_TO USER
 end

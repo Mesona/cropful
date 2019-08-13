@@ -29,8 +29,6 @@ class Landing extends React.Component {
   }
 
   componentDidMount() {
-    // TODO:
-    // Harvests aren't loading when the map is first rendered, after logging in
     this.props.requestAllHarvests()
       .then((response) => this.setState({
         harvests: response.harvests,

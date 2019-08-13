@@ -71,6 +71,12 @@ class InfoWindow extends React.Component {
                 appropriately? 
               */}
 
+              {/* 
+                TODO:
+                Add a "REMOVE" field accessible only by admin accounts of by the
+                user that posted a harvest / barter
+               */}
+
               <br></br>
               In season? {harvest.season}
 

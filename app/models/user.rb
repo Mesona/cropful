@@ -42,7 +42,9 @@ class User < ApplicationRecord
     self.session_token
   end
 
-  has_many :characters
+  # TODO:
+  # HAS_MANY HARVESTS
+  # ADD ADMIN FIELD
 
   private
   def ensure_session_token
