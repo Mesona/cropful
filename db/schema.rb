@@ -10,19 +10,35 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_11_225254) do
+ActiveRecord::Schema.define(version: 2019_08_16_171300) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "harvest_types", force: :cascade do |t|
+    t.string "classification", null: false
+    t.string "harvest_name", null: false
+    t.string "seasonal_status", null: false
+    t.string "image_url"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["classification"], name: "index_harvest_types_on_classification"
+    t.index ["harvest_name"], name: "index_harvest_types_on_harvest_name"
+  end
+
   create_table "harvests", force: :cascade do |t|
-    t.string "harvest_type", null: false
-    t.binary "ripe", null: false
+    t.string "harvest_type_id", null: false
+    t.boolean "ripe", null: false
     t.float "lat", null: false
     t.float "lng", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["harvest_type"], name: "index_harvests_on_harvest_type"
+    t.string "harvest_name", null: false
+    t.index ["harvest_name"], name: "index_harvests_on_harvest_name"
+    t.index ["harvest_type_id"], name: "index_harvests_on_harvest_type_id"
+    t.index ["lat"], name: "index_harvests_on_lat"
+    t.index ["lng"], name: "index_harvests_on_lng"
     t.index ["ripe"], name: "index_harvests_on_ripe"
   end
 

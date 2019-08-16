@@ -182,6 +182,16 @@ class Landing extends React.Component {
             zoom: 14
           }}
 
+          // TODO:
+          // Create fn that checks
+          // https://cuesa.org/eat-seasonally/charts/fruit OR
+          // https://cuesa.org/eat-seasonally/charts/vegetables OR
+          // https://cuesa.org/eat-seasonally/charts/flowers
+          // for general seasonal chart, and then pass an "inSeason?" boolean
+          // to the harvest map command below
+          // make seasonal fruit, veges, and flowers have different colors
+          // make all out of season harvests have same color
+          // make another color for unknown produce
           onMapLoad={map => {
               {this.state.harvests === null ? '' : this.state.harvests.map( harvest => 
                 new window.google.maps.Marker({
