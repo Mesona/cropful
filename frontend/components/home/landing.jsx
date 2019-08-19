@@ -199,6 +199,7 @@ class Landing extends React.Component {
                   map: map,
                   key: harvest.id,
                   harvest: harvest,
+                  // harvest_type: harvest.harvest_type
                 }).addListener('click', e => {
                   this.createInfoWindow(e, map, harvest)
                 })

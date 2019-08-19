@@ -2,7 +2,7 @@ class Api::HarvestsController < ApplicationController
 
   def index
     @harvests = Harvest.all
-    render json: @harvests
+    render json: @harvests.to_json(:include => :harvest_type)
   end
 
   def show
@@ -21,6 +21,7 @@ class Api::HarvestsController < ApplicationController
 
   def create
     @harvest = Harvest.new(harvest_params)
+    # @harvest.assign_harvest_type
 
     if @harvest.save!
       render json: @harvest;

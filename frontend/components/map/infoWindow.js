@@ -12,7 +12,7 @@ const styles = {
     maxWidth: 345,
   },
   media: {
-    height: 0,
+    // height: 0,
     paddingTop: '56.25%',
   },
 };
@@ -23,53 +23,55 @@ class InfoWindow extends React.Component {
 
     this.state = {
       harvest: this.props.harvest,
-    }
+    };
 
     this.updateRipe = this.updateRipe.bind(this);
   }
 
 
   updateRipe(status) {
-    console.log("Old ripe status: " + this.state.ripe)
+    // console.log("Old ripe status: " + this.state.ripe)
     this.state.harvest.ripe = status;
     this.props.updateHarvest(this.state.harvest);
-    console.log("New ripe status: " + this.state.ripe)
+    console.log(this.state.harvest)
+    // console.log("New ripe status: " + this.state.ripe)
   }
   
 
   render() {
 
     const { classes, harvest } = this.props;
-    const monthNames = ["December", "January", "February", "March", "April", "May", "June",
-    "July", "August", "September", "October", "November"];
+    const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+    "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+    const now = new Date();
+    const nowMonth = String(now).slice(4, 7);
+    const fruitSeasons = harvest.harvest_type.seasonal_status.split(',');
+    const inSeason = fruitSeasons[monthNames.indexOf(nowMonth)] === "available";
+    const src = harvest.harvest_type.image_url;
     
     return (
       <div>
+        {/* {img} */}
         <Card className={classes.card}>
           <CardContent>
-            <CardMedia
+            {/* <CardMedia
+              // component="img"
               className={classes.media}
               // TODO:
-              // Replace with uploadable image, hosted on AWS, or replace with wikipedia image
-              image="https://en.wikipedia.org/wiki/Grapefruit#/media/File:Grapefruit.ebola.jpeg"
-              title={harvest.harvest_type}
-            />
+              // image={harvest.harvest_type.image_url}
+              // image="https://cuesa.org/sites/default/files/styles/article_feature_image_600/public/lemons_14.jpg?itok=L8cPePct"
+              // src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Bosphorus.jpg/397px-Bosphorus.jpg"
+              title={harvest.harvest_type.harvest_name}
+              alt={harvest.harvest_type.harvest_name}
+              height="240"
+            /> */}
+            <img src={src} title={harvest.harvest_type.description}></img>
             <Typography gutterBottom variant="h6" component="h2">
-              {harvest.harvest_type}
+              {harvest.harvest_name}
             </Typography>
             <Typography component="p">
-              Lorem Ipsum
-              {/* 
-                TODO:
-                Maybe pull a short description from wikipedia? 
-              */}
-
-              {/*
-                TODO:
-                Maybe collect fruit seasonal data to automatically update
-                for when a fruit's season comes, updating marker icon
-                appropriately? 
-              */}
+              {/* {harvest.harvest_type.description} */}
 
               {/* 
                 TODO:
@@ -78,10 +80,10 @@ class InfoWindow extends React.Component {
                */}
 
               <br></br>
-              In season? {harvest.season}
+              In season? {String(inSeason)}
 
               <br></br>
-              Ripe fruit available? {harvest.ripe}
+              Ripe fruit available? {String(harvest.ripe)}
 
               <br></br>
               Last updated: {
@@ -108,4 +110,5 @@ class InfoWindow extends React.Component {
 }
 
 
+// export default InfoWindow;
 export default withStyles(styles)(InfoWindow);

@@ -7,5 +7,5 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 
-require File.expand_path('../seeds/harvests', __FILE__)
 require File.expand_path('../seeds/harvest_types', __FILE__)
+require File.expand_path('../seeds/harvests', __FILE__)
