@@ -13,7 +13,8 @@ class Map extends Component {
       markers: [],
     };
 
-    this.onScriptLoad = this.onScriptLoad.bind(this)
+    this.onScriptLoad = this.onScriptLoad.bind(this);
+    this.loadMarkers = this.loadMarkers.bind(this);
   }
 
   onScriptLoad() {
@@ -27,13 +28,19 @@ class Map extends Component {
 
     map.addListener('drag', () => {
       console.log("drag run")
-      this.props.onMapLoad(map);
+      // this.props.onMapLoad(map);
+      this.loadMarkers(map);
     })
 
     console.log("In script")
     console.log("props.onMapLoad: " + this.props.onMapLoad)
 
+    this.loadMarkers(map);
+  }
+
+  loadMarkers(map) {
     this.props.onMapLoad(map);
+
   }
 
   componentDidMount() {
