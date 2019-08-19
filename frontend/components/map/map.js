@@ -26,7 +26,11 @@ class Map extends Component {
       map: map,
     });
 
-    this.props.onMapLoad(map);
+    console.log("map === null: " + map === null)
+    if (map !== null) {
+      console.log("Map isn't null, running onMapLoad")
+      this.props.onMapLoad(map);
+    }
   }
 
   componentDidMount() {
