@@ -174,7 +174,7 @@ class Landing extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="thisMap">
         <MapContainer
           id="myMap"
           options={{
