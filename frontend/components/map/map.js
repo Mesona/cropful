@@ -26,10 +26,12 @@ class Map extends Component {
     });
 
     map.addListener('drag', () => {
+      console.log("drag run")
       this.props.onMapLoad(map);
     })
 
     console.log("In script")
+    console.log("props.onMapLoad: " + this.props.onMapLoad)
 
     this.props.onMapLoad(map);
   }
