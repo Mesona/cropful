@@ -33,8 +33,12 @@ class Map extends Component {
     this.props.onMapLoad(map);
     console.log("after mapload")
 
-    map.addListener('drag', () => {
-      this.loadMarkers(map);
+    // map.addListener('drag', () => {
+    //   this.loadMarkers(map);
+    // })
+
+    map.addListener('click', () => {
+      this.state.loadMarkers === false ? this.loadMarkers() : "";
     })
 
     // this.loadMarkers();
@@ -42,6 +46,9 @@ class Map extends Component {
 
   loadMarkers() {
     if (this.state.markersLoaded === false && this.state.map !== null) {
+      this.setState({
+        markersLoaded: true,
+      })
       this.props.onMapLoad(this.state.map);
     }
   }
