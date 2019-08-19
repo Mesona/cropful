@@ -27,12 +27,17 @@ class Map extends Component {
       map: map,
     });
 
-    // map.addListener('drag', () => {
-    //   this.loadMarkers(map);
-    // })
+    console.log("before mapload")
+    console.log("map: " + map)
+    console.log("onMapLoad: " + this.props.onMapLoad)
+    this.props.onMapLoad(map);
+    console.log("after mapload")
 
-    // this.props.onMapLoad(map);
-    this.loadMarkers();
+    map.addListener('drag', () => {
+      this.loadMarkers(map);
+    })
+
+    // this.loadMarkers();
   }
 
   loadMarkers() {
