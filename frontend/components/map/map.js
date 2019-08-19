@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { API_KEY } from '../../apiKey';
 
 class Map extends Component {
   constructor(props) {
@@ -59,7 +58,7 @@ class Map extends Component {
     if (!window.google) {
       let s = document.createElement('script');
       s.type = 'text/javascript';
-      s.src = `https://maps.google.com/maps/api/js?key=` + API_KEY;
+      s.src = `https://maps.google.com/maps/api/js?key=` + window.googleAPIKey;
       let x = document.getElementsByTagName('script')[0];
       x.parentNode.insertBefore(s, x);
 

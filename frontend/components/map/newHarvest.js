@@ -29,7 +29,7 @@ export class NewHarvest extends React.Component {
     e.stopPropagation();
     // this.props.createHarvest(this.state);
     this.props.createHarvest(this.state)
-      // .then(() => location.reload());
+      .then(() => location.reload());
 
   }
 

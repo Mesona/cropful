@@ -15,6 +15,9 @@
           "email": "<%= current_user.email %>",
         };
       </script>
+      <script type="text/javascript">
+        window.googleAPIKey = "<%= Rails.application.credentials.google[:api_key] %>"
+      </script>
     <% end %>
   </head>
 
