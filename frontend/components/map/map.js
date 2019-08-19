@@ -43,6 +43,12 @@ class Map extends Component {
 
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.map !== prevState.map) {
+      this.loadMarkers(this.state.map);
+    }
+  }
+
   componentDidMount() {
     if (!window.google) {
       let s = document.createElement('script');
