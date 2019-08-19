@@ -37,9 +37,11 @@ class Map extends Component {
     //   this.loadMarkers(map);
     // })
 
-    map.addListener('click', () => {
-      this.state.loadMarkers === false ? this.loadMarkers() : "";
-    })
+    // map.addListener('click', () => {
+      // this.state.loadMarkers === false ? this.loadMarkers() : "";
+      // console.log("click")
+      // this.loadMarkers();
+    // })
 
     // this.loadMarkers();
   }
@@ -60,9 +62,11 @@ class Map extends Component {
       s.src = `https://maps.google.com/maps/api/js?key=` + API_KEY;
       let x = document.getElementsByTagName('script')[0];
       x.parentNode.insertBefore(s, x);
+
       // Below is important. 
       // We cannot access google.maps until it's finished loading
-      s.addEventListener('load', e => {
+      s.addEventListener('load', () => {
+        console.log("script loaded")
         this.onScriptLoad()
       })
 
