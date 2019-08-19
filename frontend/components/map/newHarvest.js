@@ -29,7 +29,7 @@ export class NewHarvest extends React.Component {
     e.stopPropagation();
     // this.props.createHarvest(this.state);
     this.props.createHarvest(this.state)
-      .then(() => location.reload());
+      // .then(() => location.reload());
 
   }
 
@@ -40,10 +40,8 @@ export class NewHarvest extends React.Component {
   swapSelection(type) {
 
     if (this.state.harvest_selection === "harvest" && type === "barter") {
-      console.log("switching to barter")
       this.setState({ harvest_selection: "barter" });
     } else if (this.state.harvest_selection === "barter" && type === "harvest") {
-      console.log("switching to harvest")
       this.setState({ harvest_selection: "harvest" });
     }
 
