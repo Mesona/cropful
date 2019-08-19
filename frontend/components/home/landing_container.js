@@ -5,6 +5,7 @@ import { requestAllHarvests, updateHarvest, createHarvest } from '../../actions/
 
 const mapStateToProps = (state) => ({
   currentUser: state.session.currentUser,
+  harvests: state.entities.harvests,
 });
 
 const mapDispatchToProps = dispatch => ({

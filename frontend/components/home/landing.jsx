@@ -10,7 +10,8 @@ class Landing extends React.Component {
 
     this.state = {
       activeMarker: false,
-      harvests: null,
+      // harvests: null,
+      harvests: this.props.harvests,
       infoWindow: null,
       map: null,
       showNewHarvest: false,
@@ -176,6 +177,7 @@ class Landing extends React.Component {
   // Search feature for specific harvests
 
   render() {
+
     return (
       <div className="thisMap">
         <MapContainer
@@ -186,7 +188,7 @@ class Landing extends React.Component {
           }}
 
           onMapLoad={map => {
-              {this.state.harvests === null ? '' : this.state.harvests.map( harvest => 
+              {Object.keys(this.state.harvests).length === 0 ? '' : this.state.harvests.map( harvest => 
                 new window.google.maps.Marker({
                   position: { lat: harvest.lat, lng: harvest.lng },
                   map: map,
