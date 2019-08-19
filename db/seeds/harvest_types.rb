@@ -11,6 +11,7 @@ module HarvestTypes
   seasonal_status: "oos,oos,oos,oos,oos,oos,oos,oos,oos,oos,oos,oos",
   classification: "unknown",
   description: "Not Available.",
-  image_url: "https://cdn.pixabay.com/photo/2016/03/08/07/08/question-1243504_1280.png")
+  image_url: "https://cdn.pixabay.com/photo/2018/06/12/15/08/question-mark-3470783_1280.jpg")
+  # image_url: "https://cdn.pixabay.com/photo/2016/03/08/07/08/question-1243504_1280.png")
 
 end

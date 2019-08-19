@@ -56,30 +56,22 @@ class InfoWindow extends React.Component {
         {/* {img} */}
         <Card className={classes.card}>
           <CardContent>
-            {/* <CardMedia
-              // component="img"
-              className={classes.media}
-              // TODO:
-              // image={harvest.harvest_type.image_url}
-              // image="https://cuesa.org/sites/default/files/styles/article_feature_image_600/public/lemons_14.jpg?itok=L8cPePct"
-              // src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Bosphorus.jpg/397px-Bosphorus.jpg"
-              title={harvest.harvest_type.harvest_name}
-              alt={harvest.harvest_type.harvest_name}
-              height="240"
-            /> */}
-            <img src={src} title={harvest.harvest_type.description}></img>
+            <img src={src} title={harvest.harvest_type.description} max-height="10%"></img>
             <Typography gutterBottom variant="h6" component="h2">
-              {/* {harvest.harvest_name[0].toUpperCase + harvest.harvest_name.slice(1)} */}
               {harvestName}
             </Typography>
             <Typography component="p">
-              {/* {harvest.harvest_type.description} */}
 
               {/* 
                 TODO:
                 Add a "REMOVE" field accessible only by admin accounts of by the
                 user that posted a harvest / barter
-               */}
+              */}
+
+              {/* 
+                TODO:
+                "Navigate to" button
+              */}
 
               <br></br>
               In season? {String(inSeason)}
