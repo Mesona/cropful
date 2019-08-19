@@ -25,6 +25,10 @@ class Map extends Component {
       map: map,
     });
 
+    map.addListener('drag', () => {
+      this.props.onMapLoad(map);
+    })
+
     this.props.onMapLoad(map);
   }
 
