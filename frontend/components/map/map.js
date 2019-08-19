@@ -48,6 +48,8 @@ class Map extends Component {
       this.onScriptLoad()
     }
 
+    console.log('mounted')
+
   }
 
   render() {
