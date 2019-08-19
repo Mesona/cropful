@@ -29,6 +29,8 @@ class Map extends Component {
       this.props.onMapLoad(map);
     })
 
+    console.log("In script")
+
     this.props.onMapLoad(map);
   }
 
@@ -44,7 +46,10 @@ class Map extends Component {
       s.addEventListener('load', e => {
         this.onScriptLoad()
       })
+
+      console.log("window google")
     } else {
+      console.log("Script loaded")
       this.onScriptLoad()
     }
 
