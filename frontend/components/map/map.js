@@ -10,6 +10,7 @@ class Map extends Component {
       currentLongitude: this.props.options.center.lng,
       currentLatitude: this.props.options.center.lat,
       showNewHarvest: false,
+      markersLoaded: false,
       markers: [],
     };
 
@@ -26,26 +27,17 @@ class Map extends Component {
       map: map,
     });
 
-    map.addListener('drag', () => {
-      console.log("drag run")
-      // this.props.onMapLoad(map);
-      this.loadMarkers(map);
-    })
+    // map.addListener('drag', () => {
+    //   this.loadMarkers(map);
+    // })
 
-    console.log("In script")
-    console.log("props.onMapLoad: " + this.props.onMapLoad)
-
-    this.loadMarkers(map);
+    // this.props.onMapLoad(map);
+    this.loadMarkers();
   }
 
-  loadMarkers(map) {
-    this.props.onMapLoad(map);
-
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    if (this.state.map !== prevState.map) {
-      this.loadMarkers(this.state.map);
+  loadMarkers() {
+    if (this.state.markersLoaded === false && this.state.map !== null) {
+      this.props.onMapLoad(this.state.map);
     }
   }
 
@@ -62,17 +54,17 @@ class Map extends Component {
         this.onScriptLoad()
       })
 
-      console.log("window google")
     } else {
-      console.log("Script loaded")
-      this.onScriptLoad()
+      this.onScriptLoad();
     }
-
-    console.log('mounted')
 
   }
 
   render() {
+    // if (this.state.markersLoaded === false) {
+    //   this.loadMarkers();
+    // }
+
     return (
       // <div style={{ width: 500, height: 500 }} id={this.props.id}>
       <div className="mapMap" id={this.props.id}>
