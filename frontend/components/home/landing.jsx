@@ -10,7 +10,6 @@ class Landing extends React.Component {
 
     this.state = {
       activeMarker: false,
-      // harvests: null,
       harvests: this.props.harvests,
       infoWindow: null,
       map: null,

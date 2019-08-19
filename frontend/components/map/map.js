@@ -14,10 +14,10 @@ class Map extends Component {
     };
 
     this.onScriptLoad = this.onScriptLoad.bind(this);
-    this.loadMarkers = this.loadMarkers.bind(this);
   }
 
   onScriptLoad() {
+    console.log("onScriptLoad loaded")
     const map = new window.google.maps.Map(
       document.getElementById(this.props.id),
       this.props.options);
@@ -26,32 +26,7 @@ class Map extends Component {
       map: map,
     });
 
-    console.log("before mapload")
-    console.log("map: " + map)
-    console.log("onMapLoad: " + this.props.onMapLoad)
     this.props.onMapLoad(map);
-    console.log("after mapload")
-
-    // map.addListener('drag', () => {
-    //   this.loadMarkers(map);
-    // })
-
-    // map.addListener('click', () => {
-      // this.state.loadMarkers === false ? this.loadMarkers() : "";
-      // console.log("click")
-      // this.loadMarkers();
-    // })
-
-    // this.loadMarkers();
-  }
-
-  loadMarkers() {
-    if (this.state.markersLoaded === false && this.state.map !== null) {
-      this.setState({
-        markersLoaded: true,
-      })
-      this.props.onMapLoad(this.state.map);
-    }
   }
 
   componentDidMount() {
@@ -64,8 +39,8 @@ class Map extends Component {
 
       // Below is important. 
       // We cannot access google.maps until it's finished loading
+      console.log("map component mounted")
       s.addEventListener('load', () => {
-        console.log("script loaded")
         this.onScriptLoad()
       })
 
@@ -76,12 +51,7 @@ class Map extends Component {
   }
 
   render() {
-    // if (this.state.markersLoaded === false) {
-    //   this.loadMarkers();
-    // }
-
     return (
-      // <div style={{ width: 500, height: 500 }} id={this.props.id}>
       <div className="mapMap" id={this.props.id}>
       </div>
     );
