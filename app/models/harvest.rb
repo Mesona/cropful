@@ -32,6 +32,8 @@ class Harvest < ApplicationRecord
   def pluralize(name)
     if name[-1] == "y"
       return name[0, name.length - 1] + "ies"
+    elsif name[-1] == "o"
+      return name + "es"
     else
       return name + "s"
     end

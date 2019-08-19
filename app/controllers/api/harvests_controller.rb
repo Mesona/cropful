@@ -41,7 +41,7 @@ class Api::HarvestsController < ApplicationController
 
   private
     def harvest_params
-      params.require(:harvest).permit(:harvest_type, :ripe, :lat, :lng)
+      params.require(:harvest).permit(:harvest_name, :ripe, :lat, :lng)
     end
 
 

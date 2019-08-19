@@ -5,7 +5,7 @@ export class NewHarvest extends React.Component {
     super(props);
 
     this.state = {
-      harvest_type: "",
+      harvest_name: "",
       ripe: true,
       lat: this.props.location.lat(),
       lng: this.props.location.lng(),
@@ -27,7 +27,11 @@ export class NewHarvest extends React.Component {
 
   handleSubmit(e) {
     e.stopPropagation();
-    this.props.createHarvest(this.state);
+    // this.props.createHarvest(this.state);
+    this.props.createHarvest(this.state)
+      .then(() => location.reload())
+      // .then(() => this.props.infoWindow.close(this.props.map))
+
   }
 
   updateRipe(status) {
@@ -85,8 +89,8 @@ export class NewHarvest extends React.Component {
               Harvest
               <input
                 type="text"
-                value={this.state.harvest_type}
-                onChange={this.handleInput('harvest_type')}
+                value={this.state.harvest_name}
+                onChange={this.handleInput('harvest_name')}
               />
 
               <section className="ripe">
@@ -118,8 +122,8 @@ export class NewHarvest extends React.Component {
               Barter
               <input
                 type="text"
-                value={this.state.harvest_type}
-                onChange={this.handleInput('harvest_type')}
+                value={this.state.harvest_name}
+                onChange={this.handleInput('harvest_name')}
               />
             </div>)
           } 

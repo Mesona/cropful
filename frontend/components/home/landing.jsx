@@ -96,7 +96,7 @@ class Landing extends React.Component {
     });
 
     infoWindow.addListener('domready', e => {
-      render(<NewHarvest location={location} createHarvest={this.props.createHarvest}/>, document.getElementById('infoWindow'))
+      render(<NewHarvest location={location} createHarvest={this.props.createHarvest} map={this.state.map} infoWindow={this.state.infoWindow}/>, document.getElementById('infoWindow'))
     });
 
     infoWindow.open(map);

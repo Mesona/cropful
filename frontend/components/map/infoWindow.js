@@ -49,6 +49,7 @@ class InfoWindow extends React.Component {
     const fruitSeasons = harvest.harvest_type.seasonal_status.split(',');
     const inSeason = fruitSeasons[monthNames.indexOf(nowMonth)] === "available";
     const src = harvest.harvest_type.image_url;
+    let harvestName = harvest.harvest_name[0].toUpperCase() + harvest.harvest_name.slice(1);
     
     return (
       <div>
@@ -68,7 +69,8 @@ class InfoWindow extends React.Component {
             /> */}
             <img src={src} title={harvest.harvest_type.description}></img>
             <Typography gutterBottom variant="h6" component="h2">
-              {harvest.harvest_name}
+              {/* {harvest.harvest_name[0].toUpperCase + harvest.harvest_name.slice(1)} */}
+              {harvestName}
             </Typography>
             <Typography component="p">
               {/* {harvest.harvest_type.description} */}
