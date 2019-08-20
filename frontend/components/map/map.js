@@ -17,7 +17,6 @@ class Map extends Component {
   }
 
   onScriptLoad() {
-    console.log("onScriptLoad loaded")
     const map = new window.google.maps.Map(
       document.getElementById(this.props.id),
       this.props.options);
@@ -26,10 +25,7 @@ class Map extends Component {
       map: map,
     });
 
-    console.log("map === null: " + map === null);
     if (map !== null) {
-      // console.log("Map isn't null, running onMapLoad");
-      console.log("Map id: " + this.props.id)
       this.props.onMapLoad(map);
     }
   }
@@ -38,15 +34,19 @@ class Map extends Component {
     if (!window.google) {
       let s = document.createElement('script');
       s.type = 'text/javascript';
-      s.src = `https://maps.google.com/maps/api/js?key=` + window.googleAPIKey;
+      // s.src = `https://maps.google.com/maps/api/js?key=AIzaSyA62QJy0kplcLdge3ewX-9q1qnhbVWOH_M`;
+      s.src = `https://maps.google.com/maps/api/js?key=${window.googleAPIKey}`;
       let x = document.getElementsByTagName('script')[0];
       x.parentNode.insertBefore(s, x);
+      
+      // console.log("~~~~~ S TYPE ~~~~~: " + s.type)
+      // console.log("~~~~~ S SRC ~~~~~: " + s.src)
+      // console.log("~~~~~ X ~~~~~: " + x)
 
       // Below is important. 
       // We cannot access google.maps until it's finished loading
-      console.log("map component mounted")
       s.addEventListener('load', () => {
-        this.onScriptLoad()
+        this.onScriptLoad();
       })
 
     } else {
@@ -54,11 +54,11 @@ class Map extends Component {
     }
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState.map !== null && prevState.map !== this.state.map) {
-      this.onScriptLoad();
-    }
-  }
+  // componentDidUpdate(prevProps, prevState) {
+  //   if (prevState.map !== null && prevState.map !== this.state.map) {
+  //     this.onScriptLoad();
+  //   }
+  // }
 
   render() {
     return (

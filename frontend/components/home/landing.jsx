@@ -177,6 +177,12 @@ class Landing extends React.Component {
 
   render() {
 
+    // console.log("TEST HERE: " + window.googleAPIKey)
+    // const x = document.scripts.length;
+    // const scriptFind = document.scripts;
+    // console.log("Script count: " + x)
+    // console.log("Script list: " + scriptFind.first)
+
     return (
       <div className="thisMap">
         <MapContainer
