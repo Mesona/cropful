@@ -21,7 +21,8 @@ class Harvest < ApplicationRecord
   # attr_accessor :harvest_type
 
   def assign_harvest_type
-    plural_name = pluralize(self.harvest_name)
+    plural_name = pluralize(self.harvest_name.downcase)
+    self.harvest_name = plural_name
     if HarvestType.find_by(harvest_name: plural_name) != nil
       self.harvest_type = HarvestType.find_by(harvest_name: plural_name)
     else
