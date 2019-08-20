@@ -187,7 +187,9 @@ class Landing extends React.Component {
         <MapContainer
           id="myMap"
           options={{
-            center: { lat: 37.333942, lng: -121.923552},
+            // center: { lat: 37.333942, lng: -121.923552},
+            // 37.797796, -122.401036
+            center: { lat: 37.797796, lng: -122.401036},
             zoom: 14
           }}
 
