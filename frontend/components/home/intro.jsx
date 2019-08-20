@@ -24,7 +24,12 @@ class Intro extends React.Component {
             <img src={window.images.lemonHarvest} className="lemonHarvest"></img>
           </div>
         </section>
+        <div className="mergeLayers1_2"></div>
         <section className="introLayer2">
+
+        </section>
+        <div className="mergeLayers2_3"></div>
+        <section className="introLayer3">
          
         </section>
       </section>
