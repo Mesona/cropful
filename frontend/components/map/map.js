@@ -35,7 +35,7 @@ class Map extends Component {
       let s = document.createElement('script');
       s.type = 'text/javascript';
       let t = "https://maps.google.com/maps/api/js?key=" + window.googleAPIKey;
-      console.log("~~~~~ T HERE ~~~~~ " + t)
+      // console.log("~~~~~ T HERE ~~~~~ " + t)
       s.src = t
       s.src = `https://maps.google.com/maps/api/js?key=AIzaSyA62QJy0kplcLdge3ewX-9q1qnhbVWOH_M`;
       // s.src = `https://maps.google.com/maps/api/js?key=${window.googleAPIKey}`;
