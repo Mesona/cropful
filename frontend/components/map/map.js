@@ -51,7 +51,12 @@ class Map extends Component {
     } else {
       this.onScriptLoad();
     }
+  }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.map !== null && prevState.map !== this.state.map) {
+      this.onScriptLoad();
+    }
   }
 
   render() {
