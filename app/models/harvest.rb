@@ -34,6 +34,8 @@ class Harvest < ApplicationRecord
       return name[0, name.length - 1] + "ies"
     elsif name[-1] == "o"
       return name + "es"
+    elsif name[-1] == "s"
+      return name
     else
       return name + "s"
     end

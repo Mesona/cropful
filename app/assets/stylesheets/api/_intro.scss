@@ -1,0 +1,32 @@
+.introLayer1 {
+  display: flex;
+  justify-content: space-around;
+  padding-top: 50px;
+}
+
+.introSplashLeft {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  // justify-content: space-between;
+}
+
+
+.bigTitle {
+  font-size: 48px;
+  font-weight: bold;
+}
+
+.bigSubTitle {
+  font-size: 40px;
+  font-weight: bold;
+}
+
+.introSplashDescription {
+  font-size: 40px;
+}
+
+.introSplashRight img {
+  height: 500px;
+  width: 450px;
+}

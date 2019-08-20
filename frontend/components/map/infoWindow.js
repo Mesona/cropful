@@ -30,26 +30,29 @@ class InfoWindow extends React.Component {
 
 
   updateRipe(status) {
-    // console.log("Old ripe status: " + this.state.ripe)
     this.state.harvest.ripe = status;
     this.props.updateHarvest(this.state.harvest);
-    // console.log(this.state.harvest)
-    // console.log("New ripe status: " + this.state.ripe)
+    this.props.infoWindow.close(this.props.map);
   }
   
 
   render() {
 
     const { classes, harvest } = this.props;
-    const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
-    "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    const monthNames = ["Dec", "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+    "Jul", "Aug", "Sep", "Oct", "Nov"];
 
     const now = new Date();
     const nowMonth = String(now).slice(4, 7);
     const fruitSeasons = harvest.harvest_type.seasonal_status.split(',');
     const inSeason = fruitSeasons[monthNames.indexOf(nowMonth)] === "available";
     const src = harvest.harvest_type.image_url;
-    let harvestName = harvest.harvest_name[0].toUpperCase() + harvest.harvest_name.slice(1);
+    let harvestName;
+    if (harvest.harvest_type.harvest_name = "others") {
+      harvestName = harvest.harvest_name[0].toUpperCase() + harvest.harvest_name.slice(1);
+    } else {
+      harvestName = harvest.harvest_type.harvest_name[0].toUpperCase() + harvest.harvest_type.harvest_name.slice(1);
+    }
     
     return (
       <div>
@@ -74,10 +77,12 @@ class InfoWindow extends React.Component {
               */}
 
               <br></br>
-              In season? {String(inSeason)}
+              {inSeason === true ? "Currently in season" : "Currently out of season"}
+              {/* In season? {String(inSeason)} */}
 
               <br></br>
-              Ripe fruit available? {String(harvest.ripe)}
+              {harvest.ripe === true ? "Produce last reported as ripe." : "No ripe produce last reported."}
+              {/* Ripe fruit available? {String(harvest.ripe)} */}
 
               <br></br>
               Last updated: {

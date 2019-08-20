@@ -38,7 +38,7 @@ class Landing extends React.Component {
   }
 
   renderInfoWindow(harvest) {
-    render(<InfoWindow harvest={harvest} updateHarvest={this.props.updateHarvest} />, document.getElementById('infoWindow'))
+    render(<InfoWindow harvest={harvest} updateHarvest={this.props.updateHarvest} map={this.state.map} infoWindow={this.state.infoWindow} />, document.getElementById('infoWindow'))
   } 
 
   createInfoWindow(e, map, harvest) {
@@ -181,15 +181,8 @@ class Landing extends React.Component {
   // Search feature for specific harvests
 
   render() {
-
-    // console.log("TEST HERE: " + window.googleAPIKey)
-    // const x = document.scripts.length;
-    // const scriptFind = document.scripts;
-    // console.log("Script count: " + x)
-    // console.log("Script list: " + scriptFind.first)
-
     return (
-      <div className="thisMap">
+      <div className="mapBorder">
         {Object.keys(this.state.harvests).length === 0 ? '' :
         <MapContainer
           id="myMap"
@@ -209,8 +202,6 @@ class Landing extends React.Component {
                   this.createInfoWindow(e, map, harvest)
                 })
               )}
-
-              console.log("adding harvest marker")
 
               map.addListener('click', (e) => {
                 this.toggleMarker(e.latLng);

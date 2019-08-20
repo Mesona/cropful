@@ -10,7 +10,23 @@ class Intro extends React.Component {
           Complete intro page content
           Complete intro page styling
          */}
-        <p>Intro here!  You should not be logged in if you are seeing this</p>
+        <section className="introLayer1">
+          <div className="introSplashLeft">
+            <span className="bigTitle">Find fresh produce</span>
+            <br></br>
+            <span className="bigSubTitle">In your neighborhood</span>
+            <br></br>
+            <br></br>
+            <span className="introSplashDescription">Find publicly accessible fruit, veggies, herbs,<br></br>
+            spices, and more within your community!</span>
+          </div>
+          <div className="introSplashRight">
+            <img src={window.images.lemonHarvest} className="lemonHarvest"></img>
+          </div>
+        </section>
+        <section className="introLayer2">
+         
+        </section>
       </section>
     );
 
