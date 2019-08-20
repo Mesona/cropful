@@ -26,19 +26,22 @@ class Map extends Component {
     });
 
     if (map !== null) {
+      console.log("onScriptLoad map is NOT null")
+      console.log("harvest: " + this.props.harvest)
       this.props.onMapLoad(map);
     }
   }
 
   componentDidMount() {
+    // this.onScriptLoad();
     if (!window.google) {
       let s = document.createElement('script');
       s.type = 'text/javascript';
-      let t = "https://maps.google.com/maps/api/js?key=" + window.googleAPIKey;
+      // let t = "https://maps.google.com/maps/api/js?key=" + window.googleAPIKey;
       // console.log("~~~~~ T HERE ~~~~~ " + t)
-      s.src = t
-      s.src = `https://maps.google.com/maps/api/js?key=AIzaSyA62QJy0kplcLdge3ewX-9q1qnhbVWOH_M`;
-      // s.src = `https://maps.google.com/maps/api/js?key=${window.googleAPIKey}`;
+      // s.src = t
+      s.src = `https://maps.google.com/maps/api/js?key=${window.googleAPIKey}`;
+      // s.src = "";
       let x = document.getElementsByTagName('script')[0];
       x.parentNode.insertBefore(s, x);
       

@@ -26,6 +26,7 @@ class Landing extends React.Component {
     this.getStartingCoords = this.getStartingCoords.bind(this);
     this.recenterMap = this.recenterMap.bind(this);
     this.closeInfoWindow = this.closeInfoWindow.bind(this);
+    this.loadMap = this.loadMap.bind(this);
   }
 
   componentDidMount() {
@@ -171,6 +172,10 @@ class Landing extends React.Component {
     }
 
   }
+
+  loadMap() {
+
+  }
   
   // TODO:
   // Search feature for specific harvests
@@ -185,6 +190,7 @@ class Landing extends React.Component {
 
     return (
       <div className="thisMap">
+        {Object.keys(this.state.harvests).length === 0 ? '' :
         <MapContainer
           id="myMap"
           options={{
@@ -204,6 +210,8 @@ class Landing extends React.Component {
                 })
               )}
 
+              console.log("adding harvest marker")
+
               map.addListener('click', (e) => {
                 this.toggleMarker(e.latLng);
               });
@@ -214,7 +222,9 @@ class Landing extends React.Component {
 
               this.getStartingCoords()
           }}
-        />
+        /> 
+      
+        }
       </div>
     );
   }
