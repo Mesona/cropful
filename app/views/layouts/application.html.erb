@@ -7,6 +7,9 @@
 
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
+    <script type="text/javascript">
+      window.googleAPIKey = "<%= Rails.application.credentials.google[:api_key] %>"
+    </script>
     <% if current_user %>
       <script>
         window.currentUser = {
@@ -15,9 +18,7 @@
           "email": "<%= current_user.email %>",
         };
       </script>
-      <script type="text/javascript">
-        window.googleAPIKey = "<%= Rails.application.credentials.google[:api_key] %>"
-      </script>
+
     <% end %>
   </head>
 
