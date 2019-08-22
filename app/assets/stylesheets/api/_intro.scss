@@ -1,17 +1,24 @@
 .introLayer1 {
-  color: white;
+  color: #ecf5ed;
   display: flex;
   justify-content: space-around;
   padding-top: 50px;
   // background-size: cover;
   // background-
-  background-image: image-url("appleTree.png");
+  // background-image: image-url("appleTree.png");
+  background-image: image-url("introPagePlants.png");
+  background-repeat: no-repeat;
+  height: 1000px;
+  background-size: 100% 1000px;
+  // background-size: 100% 150%;
+  // background-size: 800 800;
 }
 
 .introSplashLeft {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
+  padding-top: 50px;
   // justify-content: space-between;
 }
 
@@ -44,13 +51,14 @@
 //   background-image: linear-gradient();
 // }
 
-// .introLayer2 {
-//   height: 90vh;
-//   background-image: image-url("cherryTomatoes.png")
-// }
+.introLayer2 {
+  height: 90vh;
+  // background-image: image-url("cherryTomatoes.png")
+}
 
-// .introLayer3 {
-//   height: 90vh;
-//   background-image: image-url("lavenderBush.png")
-// }
+.introLayer3 {
+  height: 90vh;
+  // background-image: image-url("lavenderBush.png")
+}
+
 

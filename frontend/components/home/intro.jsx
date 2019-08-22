@@ -26,11 +26,11 @@ class Intro extends React.Component {
         </section>
         <div className="mergeLayers1_2"></div>
         <section className="introLayer2">
-
+          Layer 2 test
         </section>
         <div className="mergeLayers2_3"></div>
         <section className="introLayer3">
-         
+          Layer 3 test
         </section>
       </section>
     );
