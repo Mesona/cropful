@@ -26,10 +26,8 @@ class Intro extends React.Component {
             <img src={window.images.lemonHarvest} className="lemonHarvest"></img>
           </div>
         </section>
-        <div className="mergeLayers1_2"></div>
         <section className="introLayer2">
           <section className="companyIcons">
-            {/* <img src={window.images.iconABC} /> */}
             <img src={window.images.iconApple} />
             <img src={window.images.iconHP} />
             <img src={window.images.iconMcDonalds} />
@@ -38,7 +36,6 @@ class Intro extends React.Component {
             <span>None of these companies have ever given us a review!</span>
           </div>
         </section>
-        <div className="mergeLayers2_3"></div>
         <section className="introLayer3">
           Layer 3 test
         </section>

@@ -3,15 +3,10 @@
   display: flex;
   justify-content: space-around;
   padding-top: 75px;
-  // background-size: cover;
-  // background-
-  // background-image: image-url("appleTree.png");
   background-image: image-url("introPagePlants.png");
   background-repeat: no-repeat;
   height: 1000px;
   background-size: 100% 1000px;
-  // background-size: 100% 150%;
-  // background-size: 800 800;
 }
 
 .introSplashLeft {
@@ -19,7 +14,6 @@
   flex-direction: column;
   justify-content: flex-start;
   padding-top: 50px;
-  // justify-content: space-between;
 }
 
 
@@ -43,23 +37,12 @@
   padding-right: 50px;
 }
 
-// .mergeLayers1_2 {
-//   background-image: linear-gradient(black, #4D7C50, #7f1711, black);
-//   height: 200px;
-// }
-
-// .mergeLayers2_3 {
-//   background-image: linear-gradient();
-// }
-
 .introLayer2 {
   height: 90vh;
-  // background-image: image-url("cherryTomatoes.png")
 }
 
 .introLayer3 {
   height: 90vh;
-  // background-image: image-url("lavenderBush.png")
 }
 
 .companyIcons {
