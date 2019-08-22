@@ -17,8 +17,6 @@ class Harvest < ApplicationRecord
   before_validation(on: :create) do
     self.assign_harvest_type
   end
-  # before_validation :assign_harvest_type
-  # attr_accessor :harvest_type
 
   def assign_harvest_type
 

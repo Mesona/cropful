@@ -27,7 +27,6 @@ export class NewHarvest extends React.Component {
 
   handleSubmit(e) {
     e.stopPropagation();
-    // this.props.createHarvest(this.state);
     this.props.createHarvest(this.state)
       .then(() => location.reload());
 

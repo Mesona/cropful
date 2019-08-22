@@ -12,7 +12,6 @@ const styles = {
     maxWidth: 345,
   },
   media: {
-    // height: 0,
     paddingTop: '56.25%',
   },
 };
@@ -109,5 +108,4 @@ class InfoWindow extends React.Component {
 }
 
 
-// export default InfoWindow;
 export default withStyles(styles)(InfoWindow);
