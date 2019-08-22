@@ -28,7 +28,15 @@ class Intro extends React.Component {
         </section>
         <div className="mergeLayers1_2"></div>
         <section className="introLayer2">
-          Layer 2 test
+          <section className="companyIcons">
+            {/* <img src={window.images.iconABC} /> */}
+            <img src={window.images.iconApple} />
+            <img src={window.images.iconHP} />
+            <img src={window.images.iconMcDonalds} />
+          </section>
+          <div className="companyBlurb">
+            <span>None of these companies have ever given us a review!</span>
+          </div>
         </section>
         <div className="mergeLayers2_3"></div>
         <section className="introLayer3">

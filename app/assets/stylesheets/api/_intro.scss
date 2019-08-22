@@ -62,4 +62,21 @@
   // background-image: image-url("lavenderBush.png")
 }
 
+.companyIcons {
+  padding-top: 50px;
+  margin-top: 50px;
+  display: flex;
+  justify-content: space-evenly;
+  height: 150px;
+  width: 100vw;
+}
 
+.companyIcons img {
+  object-fit: contain;
+  width: 20vw;
+}
+
+.companyBlurb {
+  padding-top: 100px;
+  text-align: center;
+}
