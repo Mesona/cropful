@@ -133,7 +133,7 @@ class Landing extends React.Component {
   }
 
   getStartingCoords() {
-    console.log("Getting coordingates")
+    console.log("Getting coordinates")
     navigator.geolocation.getCurrentPosition(
       //Will give you the current location
       (position) => {
