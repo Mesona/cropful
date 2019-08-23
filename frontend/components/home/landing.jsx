@@ -133,6 +133,7 @@ class Landing extends React.Component {
   }
 
   getStartingCoords() {
+    console.log("Getting coordingates")
     navigator.geolocation.getCurrentPosition(
       //Will give you the current location
       (position) => {
@@ -141,6 +142,8 @@ class Landing extends React.Component {
           currentLongitude: position.coords.longitude,
           currentLatitude: position.coords.latitude,
         });
+
+        console.log("Current Lat/Lng: " + this.state.currentLatitude + " | " + this.state.currentLongitude)
 
         this.recenterMap();
       }
