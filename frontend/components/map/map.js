@@ -40,10 +40,12 @@ class Map extends Component {
       } else {
         console.log("PRODUCTION")
       }
+
+      // This is necessary because Heroku requires s.src to have a specific formatting,
+      // which is different from the specific formatting local testing requires
       env === "production" ? s.src = `https://maps.google.com/maps/api/js?key=${window.googleAPIKey}` :
                              s.src = `https://maps.google.com/maps/api/js?key=` + window.googleAPIKey;
-      // s.src = `https://maps.google.com/maps/api/js?key=${window.googleAPIKey}`;
-      // s.src = `https://maps.google.com/maps/api/js?key=${window.googleAPIKey}`;
+
       let x = document.getElementsByTagName('script')[0];
       x.parentNode.insertBefore(s, x);
       
