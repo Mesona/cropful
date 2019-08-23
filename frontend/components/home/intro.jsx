@@ -45,7 +45,7 @@ class Intro extends React.Component {
         <section className="dividerLayers2-3">
         </section>
         <section className="introLayer3">
-          <div className="iconTypes">
+          <div className="iconTypes column">
             <div>
                 <img src={window.images.iconFruit} />
                 <img src={window.images.iconAlmond} />
@@ -53,23 +53,27 @@ class Intro extends React.Component {
                 <img src={window.images.iconCarrot} />
                 <img src={window.images.iconPlant} />
             </div>
-            <span>BLARG</span>
+            <span>Discover all kinds of things close to you!</span>
 
           </div>
-          <div className="idk2">
+          <div className="introWalk column">
             <div>
-
+              <img src={window.images.iconWalk} />
             </div>
-            <span>BLARG 2</span>
+            <span>Get out and walk around, it's almost as good as the food you'll find!</span>
 
           </div>
-          <div className="idk3">
+          <div className="introNature column">
+            {/* Nature icon from https://www.freeiconspng.com/img/37190 */}
             <div>
-
+                <img src={window.images.iconNature} />
             </div>
-            <span>BLARG 3</span>
+            <span>Find pockets of nature hidden even in the largest of cities!</span>
 
           </div>
+        </section>
+        <section className="introLayer4">
+
         </section>
       </section>
     );

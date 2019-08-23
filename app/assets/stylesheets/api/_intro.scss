@@ -75,13 +75,47 @@
 }
 
 .introLayer3 {
-  height: 1000px;
+  height: 150px;
   background: white;
   display: flex;
   justify-content: space-evenly;
 }
 
+.introLayer3 div {
+  margin: auto;
+}
+
+.introLayer3 span {
+  align-self: center;
+}
+
 .iconTypes img {
   height: 50px;
   width: 50px;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 200px;
+}
+
+.column span {
+  text-align: center;
+}
+
+.introWalk img{
+  height: 100px;
+  width: 100px;
+}
+
+.introNature img{
+  height: 100px;
+  width: 100px;
+}
+
+.introLayer4 {
+  height: 1000px;
+  background-color: white;
 }
