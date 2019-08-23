@@ -31,10 +31,19 @@ class Map extends Component {
   }
 
   componentDidMount() {
+    let env = process.env.NODE_ENV
     if (!window.google) {
       let s = document.createElement('script');
       s.type = 'text/javascript';
-      s.src = `https://maps.google.com/maps/api/js?key=${window.googleAPIKey}`;
+      if (process.env.NODE_ENV !== "production") {
+        console.log("NOT IN PRODUCTION")
+      } else {
+        console.log("PRODUCTION")
+      }
+      env === "production" ? s.src = `https://maps.google.com/maps/api/js?key=${window.googleAPIKey}` :
+                             s.src = `https://maps.google.com/maps/api/js?key=` + window.googleAPIKey;
+      // s.src = `https://maps.google.com/maps/api/js?key=${window.googleAPIKey}`;
+      // s.src = `https://maps.google.com/maps/api/js?key=${window.googleAPIKey}`;
       let x = document.getElementsByTagName('script')[0];
       x.parentNode.insertBefore(s, x);
       
