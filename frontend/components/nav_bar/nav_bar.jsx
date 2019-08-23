@@ -11,11 +11,6 @@ class NavBar extends React.Component {
     let docEl = document.documentElement;
     let logo = document.getElementById('nav-bar');
 
-    console.log("scrolling")
-    console.log("Logo: " + logo)
-    console.log("pageYOffset: " + window.pageYOffset)
-    console.log("docEl.clientTop: " + docEl.clientTop)
-
     var sTop = window.pageYOffset  - (docEl.clientTop || 0);
     logo.style.background =  sTop > 100 ? "rgba(0, 0, 0, 0.7)" : "rgba(0, 0, 0, 0)" ;
     logo.style.background =  sTop < 100 ? "rgba(0, 0, 0, 0)" : "rgba(0, 0, 0, 0.8)" ;
