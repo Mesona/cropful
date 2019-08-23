@@ -55,7 +55,7 @@
   width: 20vw;
 }
 
-.companyBlurb {
+.blurb {
   padding-top: 100px;
   text-align: center;
   font-size: 40px;
@@ -67,20 +67,21 @@
   object-fit: contain;
 }
 
-// .bigFruitImage img {
-  // height: 900px;
-  // object-fit: contain;
-// }
-
 .dividerLayers2-3 {
   background-image: image-url("divider.png");
   background-repeat: repeat-x;
   background-color: white;
   height: 200px;
-  border: 1px solid orange;
 }
 
 .introLayer3 {
   height: 1000px;
   background: white;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.iconTypes img {
+  height: 50px;
+  width: 50px;
 }

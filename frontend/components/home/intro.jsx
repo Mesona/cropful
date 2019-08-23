@@ -32,19 +32,44 @@ class Intro extends React.Component {
             <img src={window.images.iconHP} />
             <img src={window.images.iconMcDonalds} />
           </section>
-          <div className="companyBlurb">
-            <span>None of these companies have ever given us a review!</span>
+          <div className="blurb">
+            <span>If someone gives us a review, we'll probably put it here!</span>
           </div>
-          <div className="bigFruitImage">
+          <div className="bigFruitImage blurb">
             {/* Orange tree picture from 
                 https://pixabay.com/photos/nature-tree-orange-orange-tree-2444640/ */}
             <img src={window.images.orangeTree} />
+            Who knows what you might find around you?
           </div>
         </section>
         <section className="dividerLayers2-3">
         </section>
         <section className="introLayer3">
-          Layer 3 test
+          <div className="iconTypes">
+            <div>
+                <img src={window.images.iconFruit} />
+                <img src={window.images.iconAlmond} />
+                <br></br>
+                <img src={window.images.iconCarrot} />
+                <img src={window.images.iconPlant} />
+            </div>
+            <span>BLARG</span>
+
+          </div>
+          <div className="idk2">
+            <div>
+
+            </div>
+            <span>BLARG 2</span>
+
+          </div>
+          <div className="idk3">
+            <div>
+
+            </div>
+            <span>BLARG 3</span>
+
+          </div>
         </section>
       </section>
     );
