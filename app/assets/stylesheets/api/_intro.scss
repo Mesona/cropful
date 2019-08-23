@@ -38,11 +38,7 @@
 }
 
 .introLayer2 {
-  height: 90vh;
-}
-
-.introLayer3 {
-  height: 90vh;
+  height: 1100;
 }
 
 .companyIcons {
@@ -64,4 +60,27 @@
   text-align: center;
   font-size: 40px;
   font-weight: bold;
+}
+
+.bigFruitImage {
+  height: 900px;
+  object-fit: contain;
+}
+
+// .bigFruitImage img {
+  // height: 900px;
+  // object-fit: contain;
+// }
+
+.dividerLayers2-3 {
+  background-image: image-url("divider.png");
+  background-repeat: repeat-x;
+  background-color: white;
+  height: 200px;
+  border: 1px solid orange;
+}
+
+.introLayer3 {
+  height: 1000px;
+  background: white;
 }
