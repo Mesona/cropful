@@ -25,8 +25,8 @@ Things you may want to cover:
 * ...
 
 # Installation steps
-1. If you don't have postgres install, install it (https://postgresapp.com/)
-1. Postgres must be configured to work with ruby/rails. In the case of `postgresapp` above, this means the following commands (Per the installation instructions)
+* If you don't have postgres install, install it (https://postgresapp.com/).
+* Postgres must be configured to work with ruby/rails. In the case of `postgresapp` above, this means the following commands (Per the installation instructions)
 * Add postgressapp to your paths
 1. run ` sudo mkdir -p /etc/paths.d`
 1. run `echo /Applications/Postgres.app/Contents/Versions/latest/bin | sudo tee /etc/paths.d/postgresapp`
@@ -47,3 +47,7 @@ Things you may want to cover:
 1. run `rails db:migrate`
 1. run `rails db:seed`
 1. add api key to `rails credentials:edit`
+1. run `rails s`
+1. in a separate tab, run `npm run start`
+1. the local webserver can be accessed at `http://localhost:3000/`
+1. develop
