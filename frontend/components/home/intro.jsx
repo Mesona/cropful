@@ -108,13 +108,13 @@ class Intro extends React.Component {
                 {/* <input type="radio" name="stories" defaultChecked onClick={() => this.swapStory(1)}></input>
                 <input type="radio" name="stories" onClick={() => this.swapStory(2)}></input> */}
             <section className="storyButtons">
-              <label className="container">Test1
+              <label className="container">&nbsp;
                 <input type="radio" name="stories2" defaultChecked onClick={() => this.swapStory(1)}></input>
                 {/* <span className="radioMark"></span> */}
                 <span className="checkmark"></span>
               </label>
 
-              <label className="container">Test2
+              <label className="container">&nbsp;
                 <input type="radio" name="stories2" onClick={() => this.swapStory(2)}></input>
                 {/* <span className="radioMark"></span> */}
                 <span className="checkmark"></span>
