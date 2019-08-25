@@ -2,8 +2,23 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 class Intro extends React.Component {
-  render () {
+  constructor(props) {
+    super(props);
+    
+    this.state = {
+      story: 1,
+    }
 
+    this.swapStory = this.swapStory.bind(this);
+  }
+
+  swapStory(story) {
+    if (this.state.story !== story) {
+      this.setState({story: story});
+    }
+  } 
+
+  render () {
 
     return (
       <section className="intro">
@@ -73,7 +88,39 @@ class Intro extends React.Component {
           </div>
         </section>
         <section className="introLayer4">
+          <div className="bigLeaf">
+            <div>
+              <span className="bigTitle">Personal Stories</span><br></br>
+              {this.state.story === 1 ? 
+                <div>
+                  <p className="story">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Dolor sed viverra ipsum nunc aliquet bibendum enim. In massa tempor nec feugiat. Nunc aliquet bibendum enim facilisis gravida. Nisl nunc mi ipsum faucibus vitae aliquet nec ullamcorper. Amet luctus venenatis lectus magna fringilla. Volutpat maecenas volutpat blandit aliquam etiam erat velit scelerisque in. Egestas egestas fringilla phasellus faucibus scelerisque eleifend. Sagittis orci a scelerisque purus semper eget duis. Nulla pharetra diam sit amet nisl suscipit. Sed adipiscing diam donec adipiscing tristique risus nec feugiat in. Fusce ut placerat orci nulla. Pharetra vel turpis nunc eget lorem dolor. Tristique senectus et netus et malesuada."</p>
+                  <br></br>
+                  <span className="bold">Botimus Maximus</span>
+                </div>
+              :
+                <div>
+                  <p className="story">"I recommend you don't fire until you're within 40,000 kilometers. You did exactly what you had to do. You considered all your options, you tried every alternative and then you made the hard choice. Your head is not an artifact! I'm afraid I still don't understand, sir. You enjoyed that. Some days you get the bear, and some days the bear gets you. Wouldn't that bring about chaos? Fate. It protects fools, little children, and ships named "Enterprise." Mr. Worf, you do remember how to fire phasers? I am your worst nightmare! What? We're not at all alike! A lot of things can change in twelve years, Admiral. The look in your eyes, I recognize it. You used to have it for me."</p>
+                  <br></br>
+                  <span className="bold">William T. Riker</span>
+                </div>
+              }
+            </div>
+                {/* <input type="radio" name="stories" defaultChecked onClick={() => this.swapStory(1)}></input>
+                <input type="radio" name="stories" onClick={() => this.swapStory(2)}></input> */}
+            <section className="storyButtons">
+              <label className="container">Test1
+                <input type="radio" name="stories2" defaultChecked onClick={() => this.swapStory(1)}></input>
+                {/* <span className="radioMark"></span> */}
+                <span className="checkmark"></span>
+              </label>
 
+              <label className="container">Test2
+                <input type="radio" name="stories2" onClick={() => this.swapStory(2)}></input>
+                {/* <span className="radioMark"></span> */}
+                <span className="checkmark"></span>
+              </label>
+            </section>
+          </div>
         </section>
       </section>
     );
