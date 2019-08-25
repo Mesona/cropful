@@ -230,7 +230,11 @@
 //   transition: 1s;
 // }
 
-.introLayer5, .introLayer6 {
+.introLayer5 {
+  padding-top: 50px;
+}
+
+.introLayer5 {
   height: 500px;
   background-color: white;
   display: flex;
@@ -238,5 +242,44 @@
 }
 
 .introLayer5 div {
+  width: 45%;
+}
+
+.introLayer6 {
+  height: 100px;
+  background-color: white;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.centeredText {
+  width: 100%;
+  text-align: center;
+  margin: auto;
+}
+
+.introLayer7 {
+  background-color: white;
+  padding-top: 50px;
+  display: flex;
+  height: 700px;
+  width: 100%;
+  justify-content: space-evenly;
+}
+
+.layer7Left {
+  width: 45%;
+  position: relative;
+}
+
+.layer7Points {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.layer7Right {
   width: 45%;
 }
