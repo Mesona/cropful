@@ -1,5 +1,6 @@
 import React from 'react';
-import Intro from './intro';
+// import Intro from './intro';
+import IntroContainer from './intro_container';
 import LandingContainer from './landing_container';
 
 class Home extends React.Component {
@@ -15,7 +16,7 @@ class Home extends React.Component {
     ) : (
 
       <div>
-        <Intro />
+        <IntroContainer />
       </div>
 
     );

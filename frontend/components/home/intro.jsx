@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import { Link } from 'react-router-dom';
+import InfoWindow from '../map/infoWindow';
 
 const stories = [
   (
@@ -23,7 +24,8 @@ class Intro extends React.Component {
     super(props);
     
     this.state = {
-      story: 0
+      story: 0,
+      harvests: null,
     }
 
     this.swapStory = this.swapStory.bind(this);
@@ -34,6 +36,18 @@ class Intro extends React.Component {
       this.setState({story: story});
     }
   } 
+
+  componentDidMount() {
+    this.props.requestAllHarvests()
+      .then((harvests) => {
+        this.setState({
+          harvests: harvests.harvests,
+        })
+
+        console.log("test")
+        console.log(this.state.harvests[0]);
+      })
+  }
 
   render () {
 
@@ -55,7 +69,11 @@ class Intro extends React.Component {
             spices, and more within your community!</span>
           </div>
           <div className="introSplashRight">
-            <img src={window.images.lemonHarvest} className="lemonHarvest"></img>
+            {this.state.harvests === null ? 
+              <img src={window.images.lemonHarvest} className="lemonHarvest"></img>
+            :
+              <InfoWindow harvest={this.state.harvests[0]} updateHarvest={null} map={null} infoWindow={null} />
+            }
           </div>
         </section>
         <section className="introLayer2">
@@ -189,6 +207,7 @@ class Intro extends React.Component {
           </div>
         </section>
 
+        {/* TODO: Create database email list entry and actually store emails */}
         <section className="introLayer8">
           <div className="centeredText bigTitle">
             Stay informed
