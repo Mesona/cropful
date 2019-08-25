@@ -118,6 +118,52 @@ class Intro extends React.Component {
             </section>
           </div>
         </section>
+
+        <section className="introLayer5">
+          <div className="layer5CatchyImage">
+            {/* TODO: FIND BETTER IMAGE */}
+            <img src={window.images.orangeTree} />
+          </div>
+          <div>
+            <div className="bigTitle">
+              our story
+            </div>
+            <div className="bigSubTitle">
+              Placeholder placeholder
+            </div>
+          </div>
+        </section>
+
+        <section className="introLayer6">
+
+          <div className="numberOfDownloads">
+            <div className="bigTitle">
+              22.5 mil
+            </div>
+            <div className="bigSubTitle">
+              total downloads
+            </div>
+          </div>
+
+          <div className="numberOfDailyUses">
+            <div className="bigTitle">
+              350k day
+            </div>
+            <div className="bigSubTitle">
+              snaps/day
+            </div>
+          </div>
+
+          <div className="numberOfTotal">
+            <div className="bigTitle">
+              72.7 mil
+            </div>
+            <div className="bigSubTitle">
+              total snaps identified
+            </div>
+          </div>
+
+        </section>
       </section>
     );
 

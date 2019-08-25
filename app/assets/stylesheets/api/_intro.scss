@@ -24,7 +24,7 @@
 }
 
 .bigSubTitle {
-  font-size: 40px;
+  font-size: 36px;
   font-weight: bold;
 }
 
@@ -131,8 +131,8 @@
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
-  border: 1px solid blue;
   text-align: center;
+  z-index: 0;
 }
 
 .story {
@@ -226,3 +226,14 @@
 //   background: blue;
 //   transition: 1s;
 // }
+
+.introLayer5, .introLayer6 {
+  height: 500px;
+  background-color: white;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.introLayer5 div {
+  width: 45%;
+}
