@@ -136,33 +136,52 @@ class Intro extends React.Component {
 
         <section className="introLayer6">
 
-          <div className="numberOfDownloads">
-            <div className="bigTitle">
+          <div>
+            <div className="bigTitle centeredText">
               22.5 mil
             </div>
-            <div>
+            <div className="centeredText">
               total downloads
             </div>
           </div>
 
-          <div className="numberOfDailyUses">
+          <div>
             <div className="bigTitle">
-              350k day
+              <span className="centeredText">350k day</span>
             </div>
-            <div>
-              snaps/day
+            <div className="centeredText">
+                snaps
             </div>
           </div>
 
-          <div className="numberOfTotal">
-            <div className="bigTitle">
+          <div>
+            <div className="bigTitle centeredText">
               72.7 mil
             </div>
-            <div>
+            <div className="centeredText">
               total snaps identified
             </div>
           </div>
+        </section>
 
+        <section className="introLayer7">
+          <div className="layer7Left">
+            <div className="layer7Points">
+
+              <div className="bigTitle">
+                what's inside?
+              </div>
+              <p>+ Find publicly accessible, free to pick food!</p>
+              <p>+ Add new locations as you come across them!</p>
+              <p>+ Navigational directions take you right where you want to go! (Coming soon!)</p>
+              <p>+ See who has extra produce available for trade! (Coming soon!)</p>
+              <p>+ See which harvest markets are happening near you! (Not yet implimented)</p>
+            </div>
+          </div>
+
+          <div className="layer7Right">
+            <img src={window.images.orangeTree} />
+          </div>
         </section>
       </section>
     );
