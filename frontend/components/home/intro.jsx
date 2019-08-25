@@ -140,7 +140,7 @@ class Intro extends React.Component {
             <div className="bigTitle">
               22.5 mil
             </div>
-            <div className="bigSubTitle">
+            <div>
               total downloads
             </div>
           </div>
@@ -149,7 +149,7 @@ class Intro extends React.Component {
             <div className="bigTitle">
               350k day
             </div>
-            <div className="bigSubTitle">
+            <div>
               snaps/day
             </div>
           </div>
@@ -158,7 +158,7 @@ class Intro extends React.Component {
             <div className="bigTitle">
               72.7 mil
             </div>
-            <div className="bigSubTitle">
+            <div>
               total snaps identified
             </div>
           </div>

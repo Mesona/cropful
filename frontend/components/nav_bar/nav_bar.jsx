@@ -50,7 +50,7 @@ class NavBar extends React.Component {
         <section id="nav-bar">
 
           <div className="logo">
-            <p>Cropfull</p>
+            <p>Cropful</p>
           </div>
 
           <div className="nav-display">
