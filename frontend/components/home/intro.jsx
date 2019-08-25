@@ -183,6 +183,27 @@ class Intro extends React.Component {
             <img src={window.images.orangeTree} />
           </div>
         </section>
+
+        <section className="introLayer8">
+          <div className="centeredText bigTitle">
+            Stay informed
+          </div>
+          <div className="centeredText introLayer8SubText">
+              If you want to keep in touch and be informed of updates, pass us your email and we will inform you of any changes.
+          </div>
+          <div className="centeredText introLayer8Input">
+            <input className="introEmailInput" type="string">
+            </input>
+            <input type="submit" className="introEmailInputSubmit" value="subscribe" />
+          </div>
+        </section>
+
+        <section className="dividerLayers8-9">
+        </section>
+
+        <section className="introLayer9">
+
+        </section>
       </section>
     );
 

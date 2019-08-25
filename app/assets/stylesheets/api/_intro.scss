@@ -280,3 +280,54 @@
 .layer7Right {
   width: 45%;
 }
+
+.introLayer8 {
+  background: white;
+}
+
+.introEmailInput {
+  border-radius: 25px;
+  -moz-border-radius: 25px;
+  -webkit-border-radius: 25px;
+}
+
+.introLayer8SubText {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 40%;
+}
+
+.introLayer8Input {
+  position: relative;
+  width: 50%;
+}
+
+.introEmailInput {
+  height: 50px;
+  width: 100%;
+  position: relative;
+  background-color: #d0e1ca;
+}
+
+.introEmailInputSubmit {
+  height: 50px;
+  border-radius: 25px;
+  -moz-border-radius: 25px;
+  -webkit-border-radius: 25px;
+  position: absolute;
+  background-color: #5a9d2d;
+  right: 0px;
+  color: white;
+}
+
+.dividerLayers8-9 {
+  background-image: image-url("dividerLower.png");
+  background-repeat: repeat-x;
+  background-color: white;
+  height: 200px;
+}
+
+.introLayer9 {
+  height: 500px;
+  background: #393359;
+}
