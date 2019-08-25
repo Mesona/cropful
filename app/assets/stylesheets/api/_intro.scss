@@ -122,6 +122,7 @@
 }
 
 .bigLeaf {
+  position: relative;
   padding-top: 50px;
   margin: auto;
   height: 100%;
@@ -147,6 +148,9 @@
 .storyButtons {
   display: flex;
   justify-content: center;
+  position: absolute;
+  bottom: 50px;
+  left: 46%;
 }
 
 /* The container */
@@ -212,3 +216,13 @@
   border: 1px soid black;
 	background: white;
 }
+
+// Initial step to make the story slide
+// .bigLeaf p {
+//   position: absolute;
+//   left: -200px;
+//   width: 100px;
+//   height: 100px;
+//   background: blue;
+//   transition: 1s;
+// }
