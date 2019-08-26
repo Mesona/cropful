@@ -13,30 +13,35 @@
 
 .introSplashLeft {
   font-family: 'Lato', sans-serif;
-  padding-left: 25px;
+  padding-right: 1em;
   display: flex;
   flex: 2;
   flex-direction: column;
-  justify-content: flex-start;
-  padding-top: 50px;
+  justify-content: center;
+  align-content: center;
+  text-shadow: -1px 1px 3px black;
 }
 
 
 .bigTitle {
-  font-size: 48px;
-  font-weight: bold;
+  font-size: 4em;
+  font-weight: 100;
+  margin-bottom: -.25em;
 }
 
 .bigSubTitle {
-  font-size: 36px;
-  font-weight: bold;
+  font-size: 3.5em;
+  font-weight: 100;
 }
 
 .introSplashDescription {
-  font-size: 40px;
+  font-size: 1.5em;
+  font-weight: 300;
+  line-height: 1.5;
 }
 
 .introSplashRight {
+  justify-content: center;
   flex: 1;
 }
 .introSplashRight img {
