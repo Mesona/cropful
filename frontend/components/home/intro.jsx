@@ -71,7 +71,7 @@ class Intro extends React.Component {
             {this.state.harvests === null ? 
               <img src={window.images.lemonHarvest} className="lemonHarvest"></img>
             :
-              <InfoWindow harvest={this.state.harvests[Math.floor(Math.random() * this.state.harvests.length)]} updateHarvest={null} map={null} infoWindow={null} />
+              <InfoWindow harvest={this.state.harvests[Math.floor(Math.random() * this.state.harvests.length)]} updateHarvest={null} map={null} infoWindow={null} isIntro={true} />
             }
           </div>
         </section>
