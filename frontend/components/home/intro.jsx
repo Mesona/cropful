@@ -43,8 +43,7 @@ class Intro extends React.Component {
         this.setState({
           harvests: harvests.harvests,
         })
-
-        console.log("test")
+        console.log(this.state.harvests.length);
         console.log(this.state.harvests[0]);
       })
   }
@@ -72,7 +71,7 @@ class Intro extends React.Component {
             {this.state.harvests === null ? 
               <img src={window.images.lemonHarvest} className="lemonHarvest"></img>
             :
-              <InfoWindow harvest={this.state.harvests[0]} updateHarvest={null} map={null} infoWindow={null} />
+              <InfoWindow harvest={this.state.harvests[Math.floor(Math.random() * this.state.harvests.length)]} updateHarvest={null} map={null} infoWindow={null} />
             }
           </div>
         </section>

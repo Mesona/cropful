@@ -50,4 +50,4 @@ bundle.js
 bundle.js.map
 Gemfile.lock
 package-lock.json
-config/credentials.yml.enc
+/config/credentials.yml.enc
