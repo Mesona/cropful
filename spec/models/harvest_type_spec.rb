@@ -7,7 +7,7 @@
 #  harvest_name    :string           not null
 #  seasonal_status :string           not null
 #  image_url       :string
-#  description     :text             not null
+#  description     :text
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #

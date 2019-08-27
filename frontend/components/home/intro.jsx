@@ -160,28 +160,28 @@ class Intro extends React.Component {
 
           <div>
             <div className="bigTitle centeredText">
-              22.5 mil
+              25 mil
             </div>
             <div className="centeredText">
-              total downloads
+              is a large number
             </div>
           </div>
 
           <div>
             <div className="bigTitle">
-              <span className="centeredText">350k day</span>
+              <span className="centeredText">150k / day</span>
             </div>
             <div className="centeredText">
-                snaps
+              is slightly smaller
             </div>
           </div>
 
           <div>
             <div className="bigTitle centeredText">
-              72.7 mil
+              90.9 mil
             </div>
             <div className="centeredText">
-              total snaps identified
+              is looking good
             </div>
           </div>
         </section>
