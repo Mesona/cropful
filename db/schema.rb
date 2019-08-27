@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_27_193433) do
+ActiveRecord::Schema.define(version: 2019_08_27_194147) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 2019_08_27_193433) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "harvest_name", null: false
+    t.string "seasonal_overwrite"
     t.index ["harvest_name"], name: "index_harvests_on_harvest_name"
     t.index ["harvest_type_id"], name: "index_harvests_on_harvest_type_id"
     t.index ["lat"], name: "index_harvests_on_lat"

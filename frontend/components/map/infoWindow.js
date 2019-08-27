@@ -51,7 +51,7 @@ class InfoWindow extends React.Component {
 
     const now = new Date();
     const nowMonth = String(now).slice(4, 7);
-    const fruitSeasons = harvest.harvest_type.seasonal_status.split(',');
+    const fruitSeasons = harvest.seasonal_overwrite.split(',');
     const inSeason = fruitSeasons[monthNames.indexOf(nowMonth)] === "available";
     const src = harvest.harvest_type.image_url;
     const isIntro = this.state.isIntro;

@@ -2,14 +2,15 @@
 #
 # Table name: harvests
 #
-#  id              :bigint           not null, primary key
-#  harvest_type_id :string           not null
-#  ripe            :boolean          not null
-#  lat             :float            not null
-#  lng             :float            not null
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
-#  harvest_name    :string           not null
+#  id                 :bigint           not null, primary key
+#  harvest_type_id    :string           not null
+#  ripe               :boolean          not null
+#  lat                :float            not null
+#  lng                :float            not null
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#  harvest_name       :string           not null
+#  seasonal_overwrite :string
 #
 
 class Harvest < ApplicationRecord
@@ -30,6 +31,7 @@ class Harvest < ApplicationRecord
 
     if HarvestType.find_by(harvest_name: plural_name) != nil
       self.harvest_type = HarvestType.find_by(harvest_name: plural_name)
+      self.seasonal_overwrite = self.harvest_type.seasonal_status
     else
       self.harvest_type = HarvestType.find_by(harvest_name: "others")
     end
