@@ -37,8 +37,20 @@ class InfoWindow extends React.Component {
   }
 
   updateSeason(status) {
-    this.state.harvest.inSeason = status;
-    this.props.updateSeason(this.state.inSeason);
+    // Extract the current month
+    const monthNames = ["Dec", "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+      "Jul", "Aug", "Sep", "Oct", "Nov"];
+    const now = new Date();
+    const nowMonth = String(now).slice(4, 7);
+    const monthIndex = monthNames.indexOf(nowMonth);
+
+    // Extract and updatecurrent seasonal information
+    const thisSeasons = this.state.harvest.seasonal_overwrite.split(',');
+    thisSeasons[monthIndex] = status;
+    this.state.harvest.seasonal_overwrite = thisSeasons;
+
+    // save updated harvest
+    this.props.updateHarvest(this.state.harvest);
     this.props.infoWindow.close(this.props.map);
   }
 
@@ -84,14 +96,14 @@ class InfoWindow extends React.Component {
                 <React.Fragment>
                   <span>Growing</span>
                   {!isIntro &&
-                    <Button className="action--button__right" size="small" color="primary" onClick={() => this.updateSeason(false)}>Set as Doormant</Button>
+                    <Button className="action--button__right" size="small" color="primary" onClick={() => this.updateSeason("oos")}>Set as Doormant</Button>
                   }
                 </React.Fragment>
                 :
                 <React.Fragment>
                   <span>Doormant</span>
                   {!isIntro &&
-                    <Button className="action--button__right" size="small" color="primary" onClick={() => this.updateSeason(true)}>Set as Growing</Button>
+                    <Button className="action--button__right" size="small" color="primary" onClick={() => this.updateSeason("available")}>Set as Growing</Button>
                   }
                 </React.Fragment>
               }
