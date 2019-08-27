@@ -43,8 +43,6 @@ class Intro extends React.Component {
         this.setState({
           harvests: harvests.harvests,
         })
-        console.log(this.state.harvests.length);
-        console.log(this.state.harvests[0]);
       })
   }
 
