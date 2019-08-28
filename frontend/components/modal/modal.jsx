@@ -7,6 +7,8 @@ import SigninFormContainer from '../session/signin_form_container';
 
 function Modal({modal, closeModal}) {
   const nullUser={username: '', email: '', password: ''};
+  // TODO: Remove after getting a job
+  const demoUser={username: 'Demo', email: 'demo@email.com', password: 'password'};
   if (!modal) {
     return null;
   }
@@ -14,6 +16,10 @@ function Modal({modal, closeModal}) {
   switch (modal) {
     case 'login':
       component = <SigninFormContainer user={nullUser} />;
+      break;
+    // TODO: Remove after getting a job
+    case 'demo':
+      component = <SigninFormContainer user={demoUser} />
       break;
     case 'signup':
       component = <SignupFormContainer user={nullUser} />;

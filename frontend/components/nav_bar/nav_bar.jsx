@@ -41,6 +41,8 @@ class NavBar extends React.Component {
         &nbsp;&nbsp;
         <button onClick={() => openModal('signup')}>Sign Up</button>
         &nbsp;&nbsp;
+        {/* TODO: Remove after getting a job */}
+        <button className="DemoButton" onClick={() => openModal('demo')}>Demo Login</button>
       </div>
 
     );

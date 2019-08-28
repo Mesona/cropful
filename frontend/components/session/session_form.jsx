@@ -13,8 +13,46 @@ class SessionForm extends React.Component {
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
+
+    // TODO: Remove after getting a job
+    this.demoLogin = this.demoLogin.bind(this);
+    this.demoLoginHelper = this.demoLoginHelper.bind(this);
   }
 
+  // TODO: Remove after getting a job
+  componentDidMount() {
+    this.state.username === 'Demo' ? this.demoLogin() : '';
+  }
+
+  demoLogin() {
+    const emailArray = this.state.email.split('');
+    const passwordArray = this.state.password.split('');
+    this.state.email = '';
+    this.state.password = '';
+    this.demoLoginHelper(emailArray, passwordArray);
+  }
+
+  demoLoginHelper(emailArray, passwordArray) {
+    if (emailArray.length > 0) {
+      this.setState({
+        email: this.state.email + emailArray.shift()
+      }, () => {
+        window.setTimeout(() =>
+          this.demoLoginHelper(emailArray, passwordArray), 100);
+        }
+      );
+    } else if (passwordArray.length > 0) {
+      this.setState({
+        password: this.state.password + passwordArray.shift()
+      }, () => {
+        window.setTimeout(() =>
+          this.demoLoginHelper(emailArray, passwordArray), 10);
+        }
+      );
+    } else {
+      this.props.processForm({username: 'Demo', email: 'demo@email.com', password: 'password'}).then(this.props.closeModal);
+    }
+  }
 
   handleInput (field) {
     return (e) => {
