@@ -10,5 +10,5 @@
 
 class Subscriber < ApplicationRecord
   validates :email, presence: true
-  valudates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
+  validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
 end
