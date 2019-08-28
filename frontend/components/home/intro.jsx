@@ -29,6 +29,7 @@ class Intro extends React.Component {
     }
 
     this.swapStory = this.swapStory.bind(this);
+    this.addSubscriber = this.addSubscriber.bind(this);
   }
 
   swapStory(story) {
@@ -44,6 +45,12 @@ class Intro extends React.Component {
           harvests: harvests.harvests,
         })
       })
+  }
+
+  addSubscriber(email) {
+    let subscriber = {email: email};
+    this.props.createSubscriber(subscriber);
+    console.log('yo')
   }
 
   render () {
@@ -213,9 +220,11 @@ class Intro extends React.Component {
               If you want to keep in touch and be informed of updates, pass us your email and we will inform you of any changes.
           </div>
           <div className="centeredText introLayer8Input">
-            <input className="introEmailInput" type="string">
+            <input id="subscriberField" className="introEmailInput" type="string">
             </input>
-            <input type="submit" className="introEmailInputSubmit" value="subscribe" />
+            <input type="submit" className="introEmailInputSubmit" value="subscribe" onClick={() => this.addSubscriber(document.getElementById('subscriberField').value)} />
+            {/* <input type="submit" className="introEmailInputSubmit" value="subscribe" onClick={() => this.props.createSubscriber(document.getElementById('subscriberField').value)} /> */}
+            {/* <input type="submit" className="introEmailInputSubmit" value="subscribe" onClick={() => console.log(document.getElementById('subscriberField').value)} /> */}
           </div>
         </section>
 
