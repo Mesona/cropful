@@ -222,9 +222,10 @@ class Intro extends React.Component {
           <div className="centeredText introLayer8Input">
             <input id="subscriberField" className="introEmailInput" type="string">
             </input>
+            {/* TODO: Clear input field after submit, give some kind
+            of message like "thanks for subscribing!", and list error
+            if email has already been added */}
             <input type="submit" className="introEmailInputSubmit" value="subscribe" onClick={() => this.addSubscriber(document.getElementById('subscriberField').value)} />
-            {/* <input type="submit" className="introEmailInputSubmit" value="subscribe" onClick={() => this.props.createSubscriber(document.getElementById('subscriberField').value)} /> */}
-            {/* <input type="submit" className="introEmailInputSubmit" value="subscribe" onClick={() => console.log(document.getElementById('subscriberField').value)} /> */}
           </div>
         </section>
 
