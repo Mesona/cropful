@@ -26,7 +26,7 @@ class Landing extends React.Component {
     this.getStartingCoords = this.getStartingCoords.bind(this);
     this.recenterMap = this.recenterMap.bind(this);
     this.closeInfoWindow = this.closeInfoWindow.bind(this);
-    this.loadMap = this.loadMap.bind(this);
+    this.markerColor = this.markerColor.bind(this);
   }
 
   componentDidMount() {
@@ -173,10 +173,51 @@ class Landing extends React.Component {
 
   }
 
-  loadMap() {
+  markerColor(harvest) {
+    let markerColor;
+    switch (harvest.harvest_type.classification) {
+      case "fruit":
+        markerColor = {
+          url: "http://maps.google.com/mapfiles/ms/icons/ltblue-dot.png"
+        };
+        break;
+      case "flowers":
+        markerColor = {
+          url: "http://maps.google.com/mapfiles/ms/icons/purple-dot.png"
+        };
+        break;
+      case "nut":
+        markerColor = {
+          url: "http://maps.google.com/mapfiles/ms/icons/orange-dot.png"
+        };
+      break;
+      case "veggies":
+        markerColor = {
+          url: "http://maps.google.com/mapfiles/ms/icons/green-dot.png"
+        };
+      break;
+      case "unknown":
+        markerColor = {
+          url: "http://maps.google.com/mapfiles/ms/icons/yellow-dot.png"
+        };
+    }
 
+    // Extract the current month
+    const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+      "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    const now = new Date();
+    const nowMonth = String(now).slice(4, 7);
+    const monthIndex = monthNames.indexOf(nowMonth);
+
+    if (harvest.seasonal_overwrite[monthIndex] === "oos") {
+      markerColor = {
+        url: "http://labs.google.com/ridefinder/images/mm_20_red.png"
+      };
+    }
+
+    return markerColor;
   }
-  
+
   // TODO:
   // Search feature for specific harvests
 
@@ -200,6 +241,10 @@ class Landing extends React.Component {
                   map: map,
                   key: harvest.id,
                   harvest: harvest,
+                  icon: this.markerColor(harvest),
+                  // icon: {
+                  //   url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
+                  // },
                 }).addListener('click', e => {
                   this.createInfoWindow(e, map, harvest)
                 })

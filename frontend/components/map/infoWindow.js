@@ -29,7 +29,6 @@ class InfoWindow extends React.Component {
     this.updateSeason = this.updateSeason.bind(this);
   }
 
-
   updateRipe(status) {
     this.state.harvest.ripe = status;
     this.props.updateHarvest(this.state.harvest);
@@ -38,16 +37,16 @@ class InfoWindow extends React.Component {
 
   updateSeason(status) {
     // Extract the current month
-    const monthNames = ["Dec", "Jan", "Feb", "Mar", "Apr", "May", "Jun",
-      "Jul", "Aug", "Sep", "Oct", "Nov"];
+    const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+      "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     const now = new Date();
     const nowMonth = String(now).slice(4, 7);
     const monthIndex = monthNames.indexOf(nowMonth);
 
     // Extract and updatecurrent seasonal information
-    const thisSeasons = this.state.harvest.seasonal_overwrite.split(',');
-    thisSeasons[monthIndex] = status;
-    this.state.harvest.seasonal_overwrite = thisSeasons;
+    const newSeasons = this.state.harvest.seasonal_overwrite.split(',');
+    newSeasons[monthIndex] = status;
+    this.state.harvest.seasonal_overwrite = newSeasons.join(',');
 
     // save updated harvest
     this.props.updateHarvest(this.state.harvest);
@@ -58,8 +57,8 @@ class InfoWindow extends React.Component {
   render() {
 
     const { classes, harvest } = this.props;
-    const monthNames = ["Dec", "Jan", "Feb", "Mar", "Apr", "May", "Jun",
-      "Jul", "Aug", "Sep", "Oct", "Nov"];
+    const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+      "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
     const now = new Date();
     const nowMonth = String(now).slice(4, 7);

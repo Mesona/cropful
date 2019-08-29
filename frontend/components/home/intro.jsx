@@ -50,7 +50,6 @@ class Intro extends React.Component {
   addSubscriber(email) {
     let subscriber = {email: email};
     this.props.createSubscriber(subscriber);
-    console.log('yo')
   }
 
   render () {

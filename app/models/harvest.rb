@@ -31,10 +31,11 @@ class Harvest < ApplicationRecord
 
     if HarvestType.find_by(harvest_name: plural_name) != nil
       self.harvest_type = HarvestType.find_by(harvest_name: plural_name)
-      self.seasonal_overwrite = self.harvest_type.seasonal_status
     else
       self.harvest_type = HarvestType.find_by(harvest_name: "others")
     end
+
+    self.seasonal_overwrite = self.harvest_type.seasonal_status
   end
 
   def pluralize(name)

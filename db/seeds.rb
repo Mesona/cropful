@@ -11,4 +11,5 @@ require File.expand_path('../seeds/harvest_types', __FILE__)
 require File.expand_path('../seeds/harvests', __FILE__)
 
 # TODO: Remove after getting a job
+User.destroy_all
 demoUser = User.create!(username: 'Demo', email: 'demo@email.com', password: 'password')
