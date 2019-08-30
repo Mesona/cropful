@@ -15,6 +15,8 @@ const styles = {
   }
 };
 
+let directions;
+
 class InfoWindow extends React.Component {
   constructor(props) {
     super(props);
@@ -23,6 +25,7 @@ class InfoWindow extends React.Component {
       harvest: this.props.harvest,
       inSeason: this.props.inSeason,
       isIntro: this.props.isIntro,
+      directions: [],
     };
 
     this.updateRipe = this.updateRipe.bind(this);
@@ -55,13 +58,13 @@ class InfoWindow extends React.Component {
     this.props.infoWindow.close(this.props.map);
   }
 
-  getDirections() {
-    var directionsService = new google.maps.DirectionsService();
-    var directionsDisplay = new google.maps.DirectionsRenderer();
+  getDirections(style) {
+    let directionsService = new google.maps.DirectionsService();
+    let directionsDisplay = new google.maps.DirectionsRenderer();
 
     directionsDisplay.setMap(this.props.map);
 
-    var start = new google.maps.LatLng(
+    let start = new google.maps.LatLng(
       this.state.currentLatitude,
       this.state.currentLongitude,
     );
@@ -71,22 +74,30 @@ class InfoWindow extends React.Component {
       this.props.harvest.lng
     );
 
-    var request = {
+    // TODO: hide markers, and properly remove routes
+    let request = {
       origin: start,
       destination: end,
-      travelMode: 'WALKING'
+      travelMode: `${style.toUpperCase()}`,
     };
 
-    directionsService.route(request, function(result, status) {
+    directions = directionsService.route(request, function(result, status) {
       if (status == 'OK') {
         directionsDisplay.setDirections(result);
       }
     });
   
     this.props.infoWindow.close(this.props.map);
+    // this.props.map.addEventListener('click', () => {
+    document.getElementById('myMap').addEventListener('click', () => {
+      // directions.setMap(null);
+      console.log(directions);
+      // this.state.directions[0].setMap(null);
+      console.log('yo')
+    });
   }
 
-  getCurrentLocation() {
+  getCurrentLocation(style) {
     navigator.geolocation.getCurrentPosition(
       //Will give you the current location
       (position) => {
@@ -96,7 +107,7 @@ class InfoWindow extends React.Component {
           currentLatitude: position.coords.latitude,
         });
 
-        this.getDirections();
+        this.getDirections(style);
 
       }
     );
@@ -172,7 +183,15 @@ class InfoWindow extends React.Component {
             </Typography>
 
             <Typography component="div" className="action--field-wrapper">
-              <strong onClick={() => this.getCurrentLocation()}>Directions</strong>
+              <strong>Directions:</strong>
+              <React.Fragment>
+                  <Button size="small" color="primary" onClick={() => this.getCurrentLocation("walking")}>Walking</Button>
+                    {/* <Button className="action--button__left" size="small" color="primary" onClick={() => this.getCurrentLocation("walking")}>Walking</Button> */}
+                </React.Fragment>
+                <React.Fragment>
+                  <span></span>
+                    <Button className="action--button__right" size="small" color="primary" onClick={() => this.getCurrentLocation("driving")}>Driving</Button>
+                </React.Fragment>
             </Typography>
 
             <Typography component="p" className="action--field-wrapper">
