@@ -174,6 +174,8 @@ class Landing extends React.Component {
   }
 
   markerColor(harvest) {
+    // Alternate colors and icons can be found here:
+    // https://sites.google.com/site/gmapsdevelopment/
     let markerColor;
     switch (harvest.harvest_type.classification) {
       case "fruit":
