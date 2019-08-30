@@ -27,6 +27,8 @@ class InfoWindow extends React.Component {
 
     this.updateRipe = this.updateRipe.bind(this);
     this.updateSeason = this.updateSeason.bind(this);
+    this.getDirections = this.getDirections.bind(this);
+    this.getCurrentLocation = this.getCurrentLocation.bind(this);
   }
 
   updateRipe(status) {
@@ -53,6 +55,54 @@ class InfoWindow extends React.Component {
     this.props.infoWindow.close(this.props.map);
   }
 
+  getDirections() {
+    var directionsService = new google.maps.DirectionsService();
+    var directionsDisplay = new google.maps.DirectionsRenderer();
+
+    directionsDisplay.setMap(this.props.map);
+
+    var start = new google.maps.LatLng(
+      this.state.currentLatitude,
+      this.state.currentLongitude,
+    );
+
+    let end = new google.maps.LatLng(
+      this.props.harvest.lat,
+      this.props.harvest.lng
+    );
+
+    console.log("Testing current location: " + start)
+    console.log("Testing harvest location: " + end);
+
+    var request = {
+      origin: start,
+      destination: end,
+      travelMode: 'DRIVING'
+    };
+
+    directionsService.route(request, function(result, status) {
+      if (status == 'OK') {
+        directionsDisplay.setDirections(result);
+      }
+    });
+  
+  }
+
+  getCurrentLocation() {
+    navigator.geolocation.getCurrentPosition(
+      //Will give you the current location
+      (position) => {
+
+        this.setState({
+          currentLongitude: position.coords.longitude,
+          currentLatitude: position.coords.latitude,
+        });
+
+        this.getDirections();
+
+      }
+    );
+  }
 
   render() {
 
@@ -85,10 +135,6 @@ class InfoWindow extends React.Component {
             className="infoWindow--image"
           />
           <CardContent>
-            {/* 
-                TODO:
-                "Navigate to" button
-              */}
             <Typography component="div" className="action--field-wrapper">
               <strong>Seasonality: </strong>
               {inSeason === true ?
@@ -125,7 +171,10 @@ class InfoWindow extends React.Component {
                   }
                 </React.Fragment>
               }
-              {/* Ripe fruit available? {String(harvest.ripe)} */}
+            </Typography>
+
+            <Typography component="div" className="action--field-wrapper">
+              <strong onClick={() => this.getCurrentLocation()}>Directions</strong>
             </Typography>
 
             <Typography component="p" className="action--field-wrapper">
