@@ -71,13 +71,10 @@ class InfoWindow extends React.Component {
       this.props.harvest.lng
     );
 
-    console.log("Testing current location: " + start)
-    console.log("Testing harvest location: " + end);
-
     var request = {
       origin: start,
       destination: end,
-      travelMode: 'DRIVING'
+      travelMode: 'WALKING'
     };
 
     directionsService.route(request, function(result, status) {
@@ -86,6 +83,7 @@ class InfoWindow extends React.Component {
       }
     });
   
+    this.props.infoWindow.close(this.props.map);
   }
 
   getCurrentLocation() {
