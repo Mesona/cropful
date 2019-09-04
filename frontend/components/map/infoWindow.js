@@ -15,8 +15,6 @@ const styles = {
   }
 };
 
-let directions;
-
 class InfoWindow extends React.Component {
   constructor(props) {
     super(props);
@@ -66,7 +64,7 @@ class InfoWindow extends React.Component {
 
     let start = new google.maps.LatLng(
       this.state.currentLatitude,
-      this.state.currentLongitude,
+      this.state.currentLongitude
     );
 
     let end = new google.maps.LatLng(
@@ -81,19 +79,21 @@ class InfoWindow extends React.Component {
       travelMode: `${style.toUpperCase()}`,
     };
 
-    directions = directionsService.route(request, function(result, status) {
+    // let directions = directionsService.route(request, function(result, status) {
+    this.state.directions.push(directionsService.route(request, function(result, status) {
       if (status == 'OK') {
         directionsDisplay.setDirections(result);
       }
-    });
+    }));
   
     this.props.infoWindow.close(this.props.map);
     // this.props.map.addEventListener('click', () => {
     document.getElementById('myMap').addEventListener('click', () => {
       // directions.setMap(null);
-      console.log(directions);
+      console.log(this.state.directions);
       // this.state.directions[0].setMap(null);
       console.log('yo')
+      // directions = "";
     });
   }
 

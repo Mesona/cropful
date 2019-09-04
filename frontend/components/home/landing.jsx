@@ -211,6 +211,8 @@ class Landing extends React.Component {
     const nowMonth = String(now).slice(4, 7);
     const monthIndex = monthNames.indexOf(nowMonth);
 
+
+    // TODO: Turning produce that is out of season red isn't working
     if (harvest.seasonal_overwrite[monthIndex] === "oos") {
       markerColor = {
         url: "http://labs.google.com/ridefinder/images/mm_20_red.png"
