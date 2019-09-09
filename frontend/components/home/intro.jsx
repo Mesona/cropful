@@ -155,7 +155,12 @@ class Intro extends React.Component {
               our story
             </div>
             <div className="bigSubTitle">
-              Placeholder placeholder
+              I really enjoy walking. I walked further than most, even before Pokemon Go came out, after which I started finding excuses to walk.
+              When I moved to San Jose, one thing I noticed on my walks was the incredible number of fruit trees lining the streets, most of which
+              had a layer of fallen, ignored fruit beneath them. On one of these walks, I thought "Wouldn't it be cool if there was a listing of 
+              these trees somewhere, so people like me could come by and pick the excess fruit when it is ripe?" I did some searching, but of course
+              nothing like that existed. It's too niche, too specific. But then I realized I could make that product, and that's where Cropful
+              comes from. My interest in tracking these trees and helping prevent excess food go to waste.
             </div>
           </div>
         </section>
