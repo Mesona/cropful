@@ -207,7 +207,7 @@ class Intro extends React.Component {
               </div>
               <p>+ Find publicly accessible, free to pick food!</p>
               <p>+ Add new locations as you come across them!</p>
-              <p>+ Navigational directions take you right where you want to go! (Coming soon!)</p>
+              <p>+ Navigational directions take you right where you want to go!</p>
               <p>+ See who has extra produce available for trade! (Coming soon!)</p>
               <p>+ See which harvest markets are happening near you! (Not yet implimented)</p>
             </div>
