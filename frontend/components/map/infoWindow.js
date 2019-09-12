@@ -58,7 +58,10 @@ class InfoWindow extends React.Component {
 
   getDirections(style) {
     let directionsService = new google.maps.DirectionsService();
-    let directionsDisplay = new google.maps.DirectionsRenderer();
+    let directionsDisplay = new google.maps.DirectionsRenderer(
+      {
+          suppressMarkers: true
+      });
 
     directionsDisplay.setMap(this.props.map);
 
@@ -72,19 +75,19 @@ class InfoWindow extends React.Component {
       this.props.harvest.lng
     );
 
-    // TODO: hide markers, and properly remove routes
+    // TODO: properly remove routes
     let request = {
       origin: start,
       destination: end,
       travelMode: `${style.toUpperCase()}`,
     };
 
-    // let directions = directionsService.route(request, function(result, status) {
-    this.state.directions.push(directionsService.route(request, function(result, status) {
+    directionsService.route(request, function(result, status) {
+    // this.state.directions.push(directionsService.route(request, function(result, status) {
       if (status == 'OK') {
         directionsDisplay.setDirections(result);
       }
-    }));
+    });
   
     this.props.infoWindow.close(this.props.map);
     // this.props.map.addEventListener('click', () => {

@@ -150,11 +150,14 @@ class Intro extends React.Component {
             {/* TODO: FIND BETTER IMAGE */}
             <img src={window.images.orangeTree} />
           </div>
-          <div>
+          <div className="ourStory">
             <div className="bigTitle">
               our story
             </div>
-            <div className="bigSubTitle">
+            
+            <br></br>
+
+            <div className="ourStoryText">
               I really enjoy walking. I walked further than most, even before Pokemon Go came out, after which I started finding excuses to walk.
               When I moved to San Jose, one thing I noticed on my walks was the incredible number of fruit trees lining the streets, most of which
               had a layer of fallen, ignored fruit beneath them. On one of these walks, I thought "Wouldn't it be cool if there was a listing of 
