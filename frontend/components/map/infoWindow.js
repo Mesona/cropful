@@ -15,6 +15,8 @@ const styles = {
   }
 };
 
+let directionsDisplay = null;
+
 class InfoWindow extends React.Component {
   constructor(props) {
     super(props);
@@ -23,7 +25,7 @@ class InfoWindow extends React.Component {
       harvest: this.props.harvest,
       inSeason: this.props.inSeason,
       isIntro: this.props.isIntro,
-      directions: [],
+      directions: new google.maps.DirectionsRenderer(),
     };
 
     this.updateRipe = this.updateRipe.bind(this);
@@ -57,11 +59,16 @@ class InfoWindow extends React.Component {
   }
 
   getDirections(style) {
+    if (directionsDisplay !== null) {
+      directionsDisplay.setMap(null);
+    }
+
     let directionsService = new google.maps.DirectionsService();
-    let directionsDisplay = new google.maps.DirectionsRenderer(
+    directionsDisplay = new google.maps.DirectionsRenderer(
       {
           suppressMarkers: true
       });
+      
 
     directionsDisplay.setMap(this.props.map);
 
@@ -75,7 +82,6 @@ class InfoWindow extends React.Component {
       this.props.harvest.lng
     );
 
-    // TODO: properly remove routes
     let request = {
       origin: start,
       destination: end,
@@ -83,21 +89,12 @@ class InfoWindow extends React.Component {
     };
 
     directionsService.route(request, function(result, status) {
-    // this.state.directions.push(directionsService.route(request, function(result, status) {
       if (status == 'OK') {
         directionsDisplay.setDirections(result);
       }
     });
-  
+
     this.props.infoWindow.close(this.props.map);
-    // this.props.map.addEventListener('click', () => {
-    document.getElementById('myMap').addEventListener('click', () => {
-      // directions.setMap(null);
-      console.log(this.state.directions);
-      // this.state.directions[0].setMap(null);
-      console.log('yo')
-      // directions = "";
-    });
   }
 
   getCurrentLocation(style) {
