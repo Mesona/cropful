@@ -47,7 +47,11 @@ Things you may want to cover:
 1. run `rails db:migrate`
 1. run `rails db:seed`
 1. Get a google maps api key from: https://developers.google.com/maps/documentation/javascript/get-api-key
-1. add your api key to `rails credentials:edit`
+1. add your api key to `rails credentials:edit` as
+```
+google:
+  api_key: $API_KEY_HERE
+```
 1. run `rails s`
 1. in a separate tab, run `npm run start`
 1. the local webserver can be accessed at `http://localhost:3000/`
